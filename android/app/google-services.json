@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "186171870325",
+    "project_id": "nuriusproject-fca3a",
+    "storage_bucket": "nuriusproject-fca3a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:186171870325:android:30ee8c643ba991d12ebc3c",
+        "android_client_info": {
+          "package_name": "com.example.nurnius"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "186171870325-thp0u265l0vlfbtk8kaqt063917qjckc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCVqT5bJEPJj9wDtd9AcVejB1kebhnRcQc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "186171870325-thp0u265l0vlfbtk8kaqt063917qjckc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
