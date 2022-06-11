@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
+// ignore: depend_on_referenced_packages
 import 'package:firebase_auth/firebase_auth.dart';
+// ignore: depend_on_referenced_packages
 import 'package:google_sign_in/google_sign_in.dart';
 
 class GoogleSignInProvider extends ChangeNotifier {
@@ -32,10 +34,9 @@ class GoogleSignInProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // Future logOut() async {
-  //   await _googleSignIn.signOut();
-  //   await _firebaseAuth.signOut();
-
-  //   notifyListeners();
-  // }
+  Future logOut() async {
+    await _googleSignIn.signOut();
+    FirebaseAuth.instance.signOut();
+    notifyListeners();
+  }
 }

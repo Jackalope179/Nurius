@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:nurnius/signIn/components/password_input_field.dart';
 
 class ConfirmEmailScreen extends StatefulWidget {
   const ConfirmEmailScreen({Key? key}) : super(key: key);
@@ -89,6 +88,7 @@ class _ConfirmEmailScreenState extends State<ConfirmEmailScreen> {
     );
   }
 
+  // ignore: non_constant_identifier_names
   Widget OTP() {
     return TextFormField(
       keyboardType: TextInputType.number,

@@ -1,8 +1,9 @@
 // Password input handler
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class PasswordInput extends StatefulWidget {
+  const PasswordInput({Key? key}) : super(key: key);
+
   @override
   State<PasswordInput> createState() => PasswordInputState();
 }
@@ -14,6 +15,7 @@ class PasswordInputState extends State<PasswordInput> {
   String hintTextPassword = "Mật khẩu";
 
   @override
+  // ignore: must_call_super
   void initState() {
     _passwordVisible = false;
     focusNodePassword.addListener(() {

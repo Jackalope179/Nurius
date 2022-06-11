@@ -35,9 +35,9 @@ class _SignInState extends State<SignIn> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    UsernameInput(),
+                    const EmailInput(),
                     const Padding(padding: EdgeInsets.all(12)),
-                    PasswordInput(),
+                    const PasswordInput(),
                     const Padding(padding: EdgeInsets.all(12)),
                     SizedBox(
                       height: MediaQuery.of(context).size.height * 0.03,

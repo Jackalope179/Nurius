@@ -36,7 +36,7 @@ class Themes {
     errorColor: Color(0xFFE83329),
     primaryColorDark: Color(0xFFECDAEC),
     fontFamily: GoogleFonts.getFont('Montserrat').fontFamily,
-    textTheme: TextTheme(
+    textTheme: const TextTheme(
       headline1: TextStyle(
         fontSize: 22,
         fontWeight: FontWeight.w500,
@@ -60,7 +60,7 @@ class Themes {
     // primaryColorDark: Color(0xff4F37B3),
     primaryColorDark: Color.fromARGB(255, 159, 143, 216),
     fontFamily: GoogleFonts.getFont('Montserrat').fontFamily,
-    textTheme: TextTheme(
+    textTheme: const TextTheme(
       headline1: TextStyle(
         fontSize: 22,
         fontWeight: FontWeight.w500,

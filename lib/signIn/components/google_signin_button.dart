@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nurnius/provider/google_sign_in.dart';
+// ignore: depend_on_referenced_packages
 import 'package:provider/provider.dart';
 
 class GoogleSignInButton extends StatelessWidget {

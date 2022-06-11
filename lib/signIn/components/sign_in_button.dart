@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:nurnius/homepage/screens/home_page.dart';
-import 'package:nurnius/signup/screens/sign_up_page.dart';
 
 class SignInButton extends StatelessWidget {
   const SignInButton({Key? key}) : super(key: key);

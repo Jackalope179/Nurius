@@ -1,16 +1,18 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class UsernameInput extends StatefulWidget {
+class EmailInput extends StatefulWidget {
+  const EmailInput({Key? key}) : super(key: key);
+
   @override
-  State<UsernameInput> createState() => UsernameInputState();
+  State<EmailInput> createState() => EmailInputState();
 }
 
-class UsernameInputState extends State<UsernameInput> {
+class EmailInputState extends State<EmailInput> {
   FocusNode focusNodePhone = FocusNode();
   String hintTextPhone = 'Email';
 
   @override
+  // ignore: must_call_super
   void initState() {
     focusNodePhone.addListener(() {
       if (focusNodePhone.hasFocus) {
@@ -25,9 +27,9 @@ class UsernameInputState extends State<UsernameInput> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      key: const Key('loginFormusernameInput_textField'),
+      key: const Key('loginFormEmailInput_textField'),
       focusNode: focusNodePhone,
-      keyboardType: TextInputType.number,
+      keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
         icon: const Icon(Icons.email, color: Colors.grey),
         hintText: hintTextPhone,

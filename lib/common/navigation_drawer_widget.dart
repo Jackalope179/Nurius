@@ -1,4 +1,4 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+// ignore: depend_on_referenced_packages
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -6,13 +6,15 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nurnius/diet/screens/diet_screen.dart';
 import 'package:nurnius/game/screens/game_screen.dart';
 import 'package:nurnius/homepage/screens/home_page.dart';
+import 'package:nurnius/provider/google_sign_in.dart';
 import 'package:nurnius/specialist/screens/specialist_screen.dart';
+// ignore: depend_on_referenced_packages
+import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
 class NavigationDrawerWidget extends StatelessWidget {
   NavigationDrawerWidget({
     Key? key,
-    this.user,
   }) : super(key: key);
 
   final padding = const EdgeInsets.symmetric(horizontal: 20);
@@ -26,7 +28,7 @@ class NavigationDrawerWidget extends StatelessWidget {
 
     return Drawer(
       child: Material(
-        color: Color.fromRGBO(50, 75, 205, 1),
+        color: const Color.fromRGBO(50, 75, 205, 1),
         child: ListView(
           children: <Widget>[
             buildHeader(
@@ -42,8 +44,8 @@ class NavigationDrawerWidget extends StatelessWidget {
               padding: padding,
               child: Column(
                 children: [
-                  const SizedBox(height: 12),
-                  const SizedBox(height: 24),
+                  const SizedBox(height: 30),
+                  const Divider(color: Colors.white, thickness: 0.4),
                   buildMenuItem(
                     text: 'Trang chủ',
                     icon: Icons.home,
@@ -72,6 +74,13 @@ class NavigationDrawerWidget extends StatelessWidget {
                     text: 'Chuyên gia',
                     icon: FontAwesomeIcons.userDoctor,
                     onClicked: () => selectedItem(context, 4),
+                  ),
+                  const SizedBox(height: 24),
+                  const Divider(color: Colors.white, thickness: 0.4),
+                  buildMenuItem(
+                    text: 'Đăng xuất',
+                    icon: FontAwesomeIcons.arrowRightFromBracket,
+                    onClicked: () => selectedItem(context, 5),
                   ),
                 ],
               ),
@@ -115,8 +124,12 @@ class NavigationDrawerWidget extends StatelessWidget {
                 ],
               ),
               Text(
+                textAlign: TextAlign.left,
                 email,
-                style: const TextStyle(fontSize: 14, color: Colors.white),
+                style: const TextStyle(
+                  fontSize: 10,
+                  color: Colors.grey,
+                ),
                 overflow: TextOverflow.ellipsis,
               ),
             ],
@@ -168,6 +181,11 @@ class NavigationDrawerWidget extends StatelessWidget {
         Navigator.of(context).push(MaterialPageRoute(
           builder: (context) => const SpecialitsScreen(),
         ));
+        break;
+      case 5:
+        final provier =
+            Provider.of<GoogleSignInProvider>(context, listen: false);
+        provier.logOut();
         break;
     }
   }

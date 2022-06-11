@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nurnius/common/nurius_logo.dart';
 
@@ -10,6 +9,12 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+  static TextEditingController usernameController = TextEditingController();
+  static TextEditingController emailController = TextEditingController();
+  static TextEditingController passwordController = TextEditingController();
+  static TextEditingController confirmPasswordController =
+      TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,13 +35,13 @@ class _SignUpState extends State<SignUp> {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      userNameInput(),
+                      userNameInput(usernameController),
                       space(0.03),
-                      emailInput(),
+                      emailInput(emailController),
                       space(0.03),
-                      passwordInput(),
+                      passwordInput(passwordController),
                       space(0.03),
-                      confirmPasswordInput(),
+                      confirmPasswordInput(confirmPasswordController),
                       space(0.03),
                       singUpButton(),
                       space(0.03),
@@ -75,8 +80,9 @@ class _SignUpState extends State<SignUp> {
     );
   }
 
-  Widget userNameInput() {
+  Widget userNameInput(TextEditingController usernameController) {
     return TextFormField(
+      controller: usernameController,
       keyboardType: TextInputType.text,
       decoration: const InputDecoration(
         icon: Icon(Icons.person),
@@ -85,8 +91,9 @@ class _SignUpState extends State<SignUp> {
     );
   }
 
-  Widget emailInput() {
+  Widget emailInput(TextEditingController emailController) {
     return TextFormField(
+      controller: emailController,
       keyboardType: TextInputType.emailAddress,
       decoration: const InputDecoration(
         icon: Icon(Icons.email),
@@ -95,8 +102,9 @@ class _SignUpState extends State<SignUp> {
     );
   }
 
-  Widget passwordInput() {
+  Widget passwordInput(TextEditingController passwordController) {
     return TextFormField(
+      controller: passwordController,
       keyboardType: TextInputType.emailAddress,
       decoration: const InputDecoration(
         icon: Icon(Icons.lock),
@@ -105,8 +113,9 @@ class _SignUpState extends State<SignUp> {
     );
   }
 
-  Widget confirmPasswordInput() {
+  Widget confirmPasswordInput(TextEditingController confirmPasswordController) {
     return TextFormField(
+      controller: confirmPasswordController,
       keyboardType: TextInputType.emailAddress,
       decoration: const InputDecoration(
         icon: Icon(Icons.lock),
@@ -145,7 +154,7 @@ class _SignUpState extends State<SignUp> {
           )),
       onPressed: () {},
       child: const Text(
-        "Đăng nhập",
+        "Đăng ký",
         style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
       ),
     );
