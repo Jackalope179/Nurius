@@ -3,10 +3,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import 'package:nurnius/diet/screens/diet_screen.dart';
 import 'package:nurnius/game/screens/game_screen.dart';
 import 'package:nurnius/homepage/screens/home_page.dart';
 import 'package:nurnius/provider/google_sign_in.dart';
+import 'package:nurnius/shopping/screens/shopping_screen.dart';
 import 'package:nurnius/specialist/screens/specialist_screen.dart';
 // ignore: depend_on_referenced_packages
 import 'package:provider/provider.dart';
@@ -35,9 +35,7 @@ class NavigationDrawerWidget extends StatelessWidget {
               urlImage: urlImage,
               name: name,
               email: email,
-              onClicked: () => Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => const DietScreen(),
-              )),
+              onClicked: () {},
               context: context,
             ),
             Container(
@@ -64,12 +62,6 @@ class NavigationDrawerWidget extends StatelessWidget {
                     onClicked: () => selectedItem(context, 2),
                   ),
                   const SizedBox(height: 16),
-                  buildMenuItem(
-                    text: 'Chế độ ăn cho bé',
-                    icon: FontAwesomeIcons.bowlFood,
-                    onClicked: () => selectedItem(context, 3),
-                  ),
-                  const SizedBox(height: 24),
                   buildMenuItem(
                     text: 'Chuyên gia',
                     icon: FontAwesomeIcons.userDoctor,
@@ -169,13 +161,10 @@ class NavigationDrawerWidget extends StatelessWidget {
         break;
       case 2:
         Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => const DietScreen(),
+          builder: (context) => ShoppingScreen(),
         ));
         break;
       case 3:
-        Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => const DietScreen(),
-        ));
         break;
       case 4:
         Navigator.of(context).push(MaterialPageRoute(
