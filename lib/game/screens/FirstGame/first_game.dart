@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:nurnius/game/screens/FirstGame/successful.dart';
+// import 'package:flutter/services.dart';
 
 class FirstGame extends StatefulWidget {
   const FirstGame({Key? key}) : super(key: key);
@@ -38,19 +40,27 @@ class _FirstGameState extends State<FirstGame> {
               style: ElevatedButton.styleFrom(
                 fixedSize: Size(MediaQuery.of(context).size.width * 0.2,
                     MediaQuery.of(context).size.height * 0.15),
-                primary: Colors.blue,
+                primary: Colors.pink,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),
                 ),
               ),
               child: Text("OK"),
               onPressed: () {
-                if (FirstGame.answers.contains("bear") &&
-                    FirstGame.answers.length == 1) {
+                print(FirstGame.answers);
+                if (FirstGame.answers.length == 3) {
+                  setState(() {
+                    FirstGame.answers = [];
+                  });
                   Navigator.of(context)
                       .push(MaterialPageRoute(builder: (BuildContext context) {
                     return SuccessScreen();
                   }));
+                } else {
+                  HapticFeedback.heavyImpact();
+                  setState(() {
+                    FirstGame.answers = [];
+                  });
                 }
               },
             ),

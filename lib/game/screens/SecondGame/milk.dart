@@ -41,14 +41,25 @@ class _MilkScreenState extends State<MilkScreen>
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Column(children: [
-                const Align(
+                Align(
                   alignment: Alignment.center,
-                  child: Text(
-                    "Đã đến lúc cho con uống sữa rồi , hãy điều chỉnh nhiệt độ hợp lý để rã đông sữa nhé",
-                    style: TextStyle(color: Colors.black),
+                  child: Container(
+                    width: MediaQuery.of(context).size.width * 0.8,
+                    height: MediaQuery.of(context).size.height * 0.15,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Color(0xFFFFBAD2),
+                    ),
+                    alignment: Alignment.center,
+                    child: const Text(
+                      "Đã đến lúc cho con uống sữa\n hãy điều chỉnh nhiệt độ hợp lý để rã đông sữa nhé",
+                      style: TextStyle(
+                          color: Colors.black, fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.center,
+                    ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 15,
                 ),
                 SizedBox(
@@ -95,11 +106,17 @@ class _MilkScreenState extends State<MilkScreen>
                     padding: EdgeInsets.all(10),
                   ),
                   onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => FinalScreen(),
-                      ),
-                    );
+                    if (currentTemp == 40) {
+                      _showMyDialog(
+                          "Bạn chọn đúng rồi 😄",
+                          "Nhiệt độ trên là 40 độ, bạn đã chọn đúng rồi, hãy tiếp tục",
+                          true);
+                    } else {
+                      _showMyDialog(
+                          "Sai mức nhiệt độ rồi 😔",
+                          "Nhiệt độ trên vẫn chưa đúng, chọn lại bạn nhé",
+                          false);
+                    }
                   },
                   child: Text("Xác nhận")),
             ],
@@ -145,6 +162,51 @@ class _MilkScreenState extends State<MilkScreen>
           ],
         ),
       ),
+    );
+  }
+
+  Future<void> _showMyDialog(String title, String content, bool correct) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(15)),
+          ),
+          backgroundColor: Colors.pinkAccent,
+          title: Text(
+            title,
+            style: TextStyle(color: Colors.white),
+          ),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text(
+                  content,
+                  style: TextStyle(color: Colors.white),
+                ),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text(
+                correct ? 'Tiếp tục' : 'Chọn lại',
+                style: TextStyle(color: Colors.white),
+              ),
+              onPressed: () {
+                correct
+                    ? Navigator.of(context).push(
+                        MaterialPageRoute(builder: (BuildContext context) {
+                        return FinalScreen();
+                      }))
+                    : Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 

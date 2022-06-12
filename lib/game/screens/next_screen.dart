@@ -1,30 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:nurnius/game/screens/FirstGame/first_game.dart';
-import 'package:nurnius/game/screens/next_screen.dart';
+import 'package:nurnius/game/screens/SecondGame/second_game.dart';
 
-class StartGame extends StatefulWidget {
-  const StartGame({Key? key}) : super(key: key);
+class NextScreen extends StatefulWidget {
+  const NextScreen({Key? key}) : super(key: key);
 
   @override
-  State<StartGame> createState() => _StartGameState();
+  State<NextScreen> createState() => _NextScreenState();
 }
 
-class _StartGameState extends State<StartGame> {
+class _NextScreenState extends State<NextScreen> {
   String path = 'assets/images/baby1.png';
   double left = 0;
   @override
   Widget build(BuildContext context) {
-    if (MediaQuery.of(context).size.width - left < 100) {
+    if (MediaQuery.of(context).size.width * 0.6 - left < 100) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (_) => const FirstGame()));
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (_) => const SecondGameScreen()));
       });
     }
     return SafeArea(
       child: Scaffold(
         body: Stack(children: [
           Image.asset(
-            'assets/images/bg1.png',
+            'assets/images/bg2.png',
             fit: BoxFit.cover,
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
@@ -71,6 +70,8 @@ class _StartGameState extends State<StartGame> {
               path = 'assets/images/baby1.png';
             }
             type == 1 ? left += 10 : left -= 10;
+            // print("Left $left");
+            // print(MediaQuery.of(context).size.width);
           });
         },
         icon: type == 1 ? Icon(Icons.arrow_right) : Icon(Icons.arrow_left));

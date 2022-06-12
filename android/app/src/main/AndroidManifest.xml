@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.nurnius">
-    
+    <!-- <uses-permission android:name="android.permission.VIBRATE"/> -->
    <application
         android:label="nurnius"
         android:name="${applicationName}"

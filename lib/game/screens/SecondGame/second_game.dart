@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nurnius/game/screens/SecondGame/explain.dart';
+import 'package:flutter_emoji/flutter_emoji.dart';
 
 class SecondGameScreen extends StatefulWidget {
   const SecondGameScreen({Key? key}) : super(key: key);
@@ -95,24 +96,58 @@ class _SecondGameScreenState extends State<SecondGameScreen> {
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
-          backgroundColor: Colors.pink,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(15)),
+          ),
+          backgroundColor: Colors.pinkAccent,
           title: item != "binhnuoc1"
-              ? Text('Bạn chọn sai rồi :(')
-              : Text('Bạn chọn đúng rồi :)'),
+              ? Text(
+                  'Bạn chọn sai rồi 😔',
+                  style: TextStyle(color: Colors.white),
+                )
+              : Text(
+                  'Bạn chọn đúng rồi 😄',
+                  style: TextStyle(color: Colors.white),
+                ),
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
                 item != "binhnuoc1"
-                    ? Text('bạn chọn sai rồi. Hãy chọn lại nhé'.toUpperCase())
-                    : Text('Bạn chọn đúng rồi. Cùng xem giải thích nhé'
-                        .toUpperCase()),
+                    ? Text(
+                        'Bạn chọn sai rồi. Hãy chọn lại nhé',
+                        style: TextStyle(color: Colors.black),
+                      )
+                    : Text(
+                        'Bạn chọn đúng rồi. Cùng xem giải thích nhé !',
+                        style: TextStyle(color: Colors.black),
+                      ),
               ],
             ),
           ),
           actions: <Widget>[
             TextButton(
-              child:
-                  item != "binhnuoc1" ? Text('Chọn lại') : Text('Giải thích'),
+              child: Text(
+                'Đóng',
+                style: TextStyle(color: Colors.white),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: item != "binhnuoc1"
+                  ? Text(
+                      'Chọn lại',
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    )
+                  : Text(
+                      'Giải thích',
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
               onPressed: () {
                 item != "binhnuoc1"
                     ? Navigator.of(context).pop()
