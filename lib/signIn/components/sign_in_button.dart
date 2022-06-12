@@ -1,14 +1,20 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:nurnius/firestore/fire_store_config.dart';
 import 'package:nurnius/homepage/screens/home_page.dart';
 
 class SignInButton extends StatelessWidget {
-  const SignInButton({Key? key}) : super(key: key);
+  const SignInButton({Key? key, required this.email, required this.password})
+      : super(key: key);
+  final String password;
+  final String email;
 
   @override
   Widget build(BuildContext context) {
+    FireStoreConnection? fireStoreConnection =
+        FireStoreConnection.getFireStoreInstance();
+
     return ElevatedButton(
-      //  change color of button when not authentication yet
-      key: const Key('loginForm_continue_raisedButton'),
       style: ButtonStyle(
           alignment: Alignment.center,
           backgroundColor: MaterialStateProperty.resolveWith<Color>(
@@ -34,11 +40,26 @@ class SignInButton extends StatelessWidget {
             ),
           )),
       onPressed: () {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => const HomePage(),
-          ),
-        );
+        print("first check" + email + password);
+        var user = fireStoreConnection?.getUser(email, password);
+        Future<bool>? check =
+            fireStoreConnection?.checkExistUserWithpw(email, password);
+
+        // ignore: unrelated_type_equality_checks
+        if (check == true) {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => HomePage(
+                userWithNormalLogin: user,
+              ),
+            ),
+          );
+        } else {
+          const snackBar = SnackBar(
+            content: Text("Email hoặc mật khẩu không đúng!!!"),
+          );
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        }
       },
       child: const Text(
         "Đăng nhập",

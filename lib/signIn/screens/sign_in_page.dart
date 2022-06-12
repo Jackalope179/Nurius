@@ -14,6 +14,9 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,9 +38,13 @@ class _SignInState extends State<SignIn> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const EmailInput(),
+                    EmailInput(
+                      emailController: emailController,
+                    ),
                     const Padding(padding: EdgeInsets.all(12)),
-                    const PasswordInput(),
+                    PasswordInput(
+                      passwordController: passwordController,
+                    ),
                     const Padding(padding: EdgeInsets.all(12)),
                     SizedBox(
                       height: MediaQuery.of(context).size.height * 0.03,
@@ -46,7 +53,10 @@ class _SignInState extends State<SignIn> {
                     SizedBox(
                       height: MediaQuery.of(context).size.height * 0.05,
                     ),
-                    const SignInButton(),
+                    SignInButton(
+                      email: emailController.text,
+                      password: passwordController.text,
+                    ),
                     SizedBox(
                       height: MediaQuery.of(context).size.height * 0.05,
                     ),

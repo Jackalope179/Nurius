@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nurnius/common/nurius_logo.dart';
+import 'package:nurnius/firestore/fire_store_config.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
@@ -14,6 +15,7 @@ class _SignUpState extends State<SignUp> {
   static TextEditingController passwordController = TextEditingController();
   static TextEditingController confirmPasswordController =
       TextEditingController();
+  FireStoreConnection? firestore = FireStoreConnection.getFireStoreInstance();
 
   @override
   Widget build(BuildContext context) {
@@ -126,8 +128,6 @@ class _SignUpState extends State<SignUp> {
 
   Widget singUpButton() {
     return ElevatedButton(
-      //  change color of button when not authentication yet
-      key: const Key('loginForm_continue_raisedButton'),
       style: ButtonStyle(
           alignment: Alignment.center,
           backgroundColor: MaterialStateProperty.resolveWith<Color>(
@@ -152,7 +152,23 @@ class _SignUpState extends State<SignUp> {
               borderRadius: BorderRadius.circular(15),
             ),
           )),
-      onPressed: () {},
+      onPressed: () async {
+        if (passwordController.text != confirmPasswordController.text) {
+          const snackBar = SnackBar(
+            content: Text("Mật khẩu xác thực không đúng!!!"),
+          );
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        } else if (await firestore!.checkExistUser(emailController.text)) {
+          const snackBar = SnackBar(
+            content: Text("Email đã được sử dụng!!!"),
+          );
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        } else {
+          firestore?.saveUser(emailController.text, passwordController.text,
+              usernameController.text);
+          Navigator.of(context).pop();
+        }
+      },
       child: const Text(
         "Đăng ký",
         style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),

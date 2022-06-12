@@ -8,18 +8,55 @@ class FireStoreConnection {
     return instance_;
   }
 
-  Stream<QuerySnapshot<Object>> getUser() {
-    final arrData = _firestore.collection("users").snapshots();
+  Stream<QuerySnapshot<Object>> getUser(String email, String password) {
+    var user = _firestore
+        .collection('user')
+        .where('email', isEqualTo: email)
+        .where('password', isEqualTo: password)
+        .snapshots();
+
+    return user;
+  }
+
+  Stream<QuerySnapshot<Object>> getAllUsers() {
+    final arrData = _firestore.collection("user").snapshots();
     return arrData;
   }
 
-  void saveUser(String email, String password, String userName) async {
+  void saveUser(String email, String password, String userName) {
     var data = {
       "email": email,
       "password": password,
       "userName": userName,
     };
-    await _firestore.collection("user").add(data);
+    _firestore.collection("user").add(data);
+  }
+
+  Future<bool> checkExistUser(String email) async {
+    var user = await _firestore
+        .collection('user')
+        .where('email', isEqualTo: email)
+        .get();
+    if (user.docs.isNotEmpty) {
+      return true;
+    }
+    return false;
+  }
+
+  Future<bool> checkExistUserWithpw(String email, String password) async {
+    print("check" + email + password);
+    var user = await _firestore
+        .collection('user')
+        .where('email', isEqualTo: email)
+        .where('password', isEqualTo: password)
+        .get();
+
+    if (user.docs.isNotEmpty) {
+      return true;
+    } else {
+      print("Empty user");
+      return false;
+    }
   }
 
   Stream<QuerySnapshot<Object>> getDipersProduct() {

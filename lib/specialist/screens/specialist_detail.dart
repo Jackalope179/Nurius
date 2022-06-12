@@ -23,6 +23,7 @@ class _SpecialistDetailScreenState extends State<SpecialistDetailScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFFF9F6F0),
+        foregroundColor: const Color(0xFF000000),
         title: const Text(
           "Kết nối chuyên gia",
           style: TextStyle(color: Colors.black),

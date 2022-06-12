@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:nurnius/game/screens/FirstGame/first_game.dart';
+import 'package:nurnius/game/screens/SecondGame/second_game.dart';
 
 class PlayButtonWidget extends StatelessWidget {
   const PlayButtonWidget({Key? key}) : super(key: key);
@@ -30,7 +32,12 @@ class PlayButtonWidget extends StatelessWidget {
               borderRadius: BorderRadius.circular(15),
             ),
           )),
-      onPressed: () {},
+      onPressed: () {
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (BuildContext context) {
+          return SecondGameScreen();
+        }));
+      },
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
@@ -43,7 +50,7 @@ class PlayButtonWidget extends StatelessWidget {
             style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
           ),
           SizedBox(
-            width: MediaQuery.of(context).size.width * 0.05,
+            width: MediaQuery.of(context).size.width * 0.01,
           ),
         ],
       ),

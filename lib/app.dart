@@ -17,7 +17,7 @@ class NuriusApp extends StatelessWidget {
             child: CircularProgressIndicator(),
           );
         } else if (snapshot.hasData) {
-          return const HomePage();
+          return HomePage();
         } else if (snapshot.hasError) {
           return Center(
             child: Text('Error: ${snapshot.error}'),

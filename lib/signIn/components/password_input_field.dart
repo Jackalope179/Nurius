@@ -1,29 +1,25 @@
-// Password input handler
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class PasswordInput extends StatefulWidget {
-  const PasswordInput({Key? key}) : super(key: key);
-
+  PasswordInput({Key? key, required this.passwordController}) : super(key: key);
+  TextEditingController passwordController;
   @override
   State<PasswordInput> createState() => PasswordInputState();
 }
 
 class PasswordInputState extends State<PasswordInput> {
-  bool _passwordVisible = false;
-
-  FocusNode focusNodePassword = FocusNode();
-  String hintTextPassword = "Mật khẩu";
+  FocusNode focusNodePhone = FocusNode();
+  String hintTextPhone = 'Password';
 
   @override
   // ignore: must_call_super
   void initState() {
-    _passwordVisible = false;
-    focusNodePassword.addListener(() {
-      if (focusNodePassword.hasFocus) {
-        hintTextPassword = '';
-        setState(() {});
+    focusNodePhone.addListener(() {
+      if (focusNodePhone.hasFocus) {
+        hintTextPhone = '';
       } else {
-        hintTextPassword = 'Mật khẩu';
+        hintTextPhone = 'Password';
       }
       setState(() {});
     });
@@ -32,25 +28,13 @@ class PasswordInputState extends State<PasswordInput> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      key: const Key('loginFormpasswordInput_textField'),
-      focusNode: focusNodePassword,
+      controller: widget.passwordController,
+      focusNode: focusNodePhone,
       keyboardType: TextInputType.text,
-      obscureText: !_passwordVisible,
       decoration: InputDecoration(
-        icon: const Icon(Icons.lock),
-        labelText: 'Mật khẩu',
-        hintText: hintTextPassword,
-        suffixIcon: IconButton(
-          icon: Icon(
-            _passwordVisible ? Icons.visibility : Icons.visibility_off,
-            color: Theme.of(context).primaryColorDark,
-          ),
-          onPressed: () {
-            setState(() {
-              _passwordVisible = !_passwordVisible;
-            });
-          },
-        ),
+        icon: const Icon(Icons.email, color: Colors.grey),
+        hintText: hintTextPhone,
+        labelText: 'Password',
       ),
     );
   }

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class EmailInput extends StatefulWidget {
-  const EmailInput({Key? key}) : super(key: key);
-
+  EmailInput({Key? key, required this.emailController}) : super(key: key);
+  TextEditingController emailController;
   @override
   State<EmailInput> createState() => EmailInputState();
 }
@@ -27,7 +28,7 @@ class EmailInputState extends State<EmailInput> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      key: const Key('loginFormEmailInput_textField'),
+      controller: widget.emailController,
       focusNode: focusNodePhone,
       keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
