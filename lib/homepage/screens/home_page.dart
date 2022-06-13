@@ -4,9 +4,10 @@ import 'package:nurnius/common/navigation_drawer_widget.dart';
 // ignore: depend_on_referenced_packages
 import 'package:firebase_auth/firebase_auth.dart';
 
+// ignore: must_be_immutable
 class HomePage extends StatefulWidget {
-  HomePage({Key? key, this.userWithNormalLogin}) : super(key: key);
-  var userWithNormalLogin;
+  HomePage({Key? key}) : super(key: key);
+  // var userWithNormalLogin;
   User? user = FirebaseAuth.instance.currentUser;
   @override
   State<HomePage> createState() => _HomePageState();
@@ -20,10 +21,7 @@ class _HomePageState extends State<HomePage> {
     return SafeArea(
       child: Scaffold(
         key: scaffoldKey,
-        endDrawer: NavigationDrawerWidget(
-          userWithNormalLogin: widget.userWithNormalLogin,
-          user: widget.user,
-        ),
+        endDrawer: NavigationDrawerWidget(),
         body: Center(
           child: SingleChildScrollView(
               child: Column(

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nurnius/game/screens/FirstGame/first_game.dart';
-import 'package:nurnius/game/screens/SecondGame/second_game.dart';
-import 'package:nurnius/game/screens/start_game_screen.dart';
+import 'package:nurnius/game/screens/third_game_screen.dart';
+import 'package:nurnius/game/screens/first_game_screen.dart';
 
 class PlayButtonWidget extends StatelessWidget {
   const PlayButtonWidget({Key? key}) : super(key: key);
@@ -36,7 +35,7 @@ class PlayButtonWidget extends StatelessWidget {
       onPressed: () {
         Navigator.of(context)
             .push(MaterialPageRoute(builder: (BuildContext context) {
-          return StartGame();
+          return const ThirdGameScreen();
         }));
       },
       child: Row(

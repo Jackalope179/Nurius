@@ -112,6 +112,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
         );
         try {
           await FlutterEmailSender.send(email);
+          // ignore: empty_catches
         } catch (e) {}
         // ignore: use_build_context_synchronously
         Navigator.of(context).push(

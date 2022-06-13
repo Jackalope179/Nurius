@@ -1,8 +1,8 @@
-import 'package:nurnius/app.dart';
+// ignore: depend_on_referenced_packages
 import "package:firebase_core/firebase_core.dart";
 import 'package:flutter/material.dart';
-import 'package:nurnius/game/screens/game_screen.dart';
 import 'package:nurnius/provider/google_sign_in.dart';
+import 'package:nurnius/signIn/screens/sign_in_page.dart';
 // ignore: depend_on_referenced_packages
 import 'package:provider/provider.dart';
 
@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
         ),
         // home: const NuriusApp(),
-        home: const GameScreen(),
+        home: const SignIn(),
       ),
     );
   }

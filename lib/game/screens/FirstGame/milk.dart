@@ -1,8 +1,6 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:nurnius/game/screens/SecondGame/final.dart';
+import 'package:nurnius/game/screens/FirstGame/final.dart';
 
 class MilkScreen extends StatefulWidget {
   const MilkScreen({Key? key}) : super(key: key);
@@ -13,6 +11,7 @@ class MilkScreen extends StatefulWidget {
 
 class _MilkScreenState extends State<MilkScreen>
     with SingleTickerProviderStateMixin {
+  // ignore: prefer_typing_uninitialized_variables
   var _animationController;
   double currentPos = 0.0;
   int currentTemp = 0;
@@ -36,7 +35,7 @@ class _MilkScreenState extends State<MilkScreen>
     return SafeArea(
       child: Scaffold(
         body: Padding(
-          padding: EdgeInsets.all(15),
+          padding: const EdgeInsets.all(15),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -48,7 +47,7 @@ class _MilkScreenState extends State<MilkScreen>
                     height: MediaQuery.of(context).size.height * 0.15,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      color: Color(0xFFFFBAD2),
+                      color: const Color(0xFFFFBAD2),
                     ),
                     alignment: Alignment.center,
                     child: const Text(
@@ -74,7 +73,7 @@ class _MilkScreenState extends State<MilkScreen>
                           backgroundColor: Colors.pink,
                           child: Text(
                             '$currentTemp',
-                            style: TextStyle(color: Colors.white),
+                            style: const TextStyle(color: Colors.white),
                           ),
                         ),
                       ),
@@ -89,7 +88,7 @@ class _MilkScreenState extends State<MilkScreen>
                     ],
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 15,
                 ),
                 buildSlider(),
@@ -103,7 +102,7 @@ class _MilkScreenState extends State<MilkScreen>
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    padding: EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(10),
                   ),
                   onPressed: () {
                     if (currentTemp == 40) {
@@ -118,7 +117,7 @@ class _MilkScreenState extends State<MilkScreen>
                           false);
                     }
                   },
-                  child: Text("Xác nhận")),
+                  child: const Text("Xác nhận")),
             ],
           ),
         ),
@@ -133,12 +132,13 @@ class _MilkScreenState extends State<MilkScreen>
                 }
                 _animationController.animateTo(currentPos);
                 setState(() {
+                  // var parser = EmojiParser();
                   if (currentTemp >= 5) {
                     currentTemp -= 5;
                   }
                 });
               },
-              child: Icon(
+              child: const Icon(
                 FontAwesomeIcons.minus,
               ),
             ),
@@ -155,7 +155,7 @@ class _MilkScreenState extends State<MilkScreen>
                   }
                 });
               },
-              child: Icon(
+              child: const Icon(
                 FontAwesomeIcons.plus,
               ),
             ),
@@ -171,20 +171,20 @@ class _MilkScreenState extends State<MilkScreen>
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
-          shape: RoundedRectangleBorder(
+          shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(15)),
           ),
           backgroundColor: Colors.pinkAccent,
           title: Text(
             title,
-            style: TextStyle(color: Colors.white),
+            style: const TextStyle(color: Colors.white),
           ),
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
                 Text(
                   content,
-                  style: TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Colors.white),
                 ),
               ],
             ),
@@ -193,13 +193,13 @@ class _MilkScreenState extends State<MilkScreen>
             TextButton(
               child: Text(
                 correct ? 'Tiếp tục' : 'Chọn lại',
-                style: TextStyle(color: Colors.white),
+                style: const TextStyle(color: Colors.white),
               ),
               onPressed: () {
                 correct
                     ? Navigator.of(context).push(
                         MaterialPageRoute(builder: (BuildContext context) {
-                        return FinalScreen();
+                        return const FinalScreen();
                       }))
                     : Navigator.of(context).pop();
               },

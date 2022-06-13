@@ -44,7 +44,6 @@ class FireStoreConnection {
   }
 
   Future<bool> checkExistUserWithpw(String email, String password) async {
-    print("check" + email + password);
     var user = await _firestore
         .collection('user')
         .where('email', isEqualTo: email)
@@ -54,7 +53,6 @@ class FireStoreConnection {
     if (user.docs.isNotEmpty) {
       return true;
     } else {
-      print("Empty user");
       return false;
     }
   }

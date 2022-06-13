@@ -1,165 +1,103 @@
 import 'package:flutter/material.dart';
-import 'package:nurnius/game/screens/SecondGame/explain.dart';
-import 'package:flutter_emoji/flutter_emoji.dart';
+import 'package:flutter/services.dart';
+import 'package:nurnius/game/screens/SecondGame/successful.dart';
 
-class SecondGameScreen extends StatefulWidget {
-  const SecondGameScreen({Key? key}) : super(key: key);
-  static String answer = "";
-  static bool isAnswerChoosen = false;
-
+class SecondGame extends StatefulWidget {
+  const SecondGame({Key? key}) : super(key: key);
+  static var answers = [];
   @override
-  State<SecondGameScreen> createState() => _SecondGameScreenState();
+  State<SecondGame> createState() => _SecondGameState();
 }
 
-class _SecondGameScreenState extends State<SecondGameScreen> {
+class _SecondGameState extends State<SecondGame> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFFF9F6F0),
-      body: Stack(
-        children: [
-          buildItem(.1, .4, "mistery", .2, .4, context),
-          buildItem(.6, .1, "binhnuoc1", .15, .3, context),
-          buildItem(.6, .4, "binhnuoc2", .15, .3, context),
-          buildItem(.6, .7, "binhnuoc3", .15, .3, context),
-        ],
-      ),
+    return Stack(
+      children: [
+        buildItem(0, 0, 'crib', 1, 1, context),
+        SecondGame.answers.contains("pillow")
+            ? Container()
+            : buildItem(0.2, 0.3, 'pillow', 0.4, 0.4, context),
+        SecondGame.answers.contains('baby')
+            ? Container()
+            : buildItem(0.3, 0.2, 'baby', 0.6, 0.6, context),
+        SecondGame.answers.contains('remote')
+            ? Container()
+            : buildItem(0.4, 0.15, 'remote', 0.3, 0.3, context),
+        SecondGame.answers.contains('phone')
+            ? Container()
+            : buildItem(0.4, 0.6, 'phone', 0.3, 0.3, context),
+        SecondGame.answers.contains('bear')
+            ? Container()
+            : buildItem(0.5, 0.6, 'bear', 0.3, 0.3, context),
+        Positioned(
+          // center
+          top: MediaQuery.of(context).size.height * 0.8,
+          left: MediaQuery.of(context).size.width * 0.4,
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              fixedSize: Size(MediaQuery.of(context).size.width * 0.2,
+                  MediaQuery.of(context).size.height * 0.15),
+              primary: Colors.pink,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+            ),
+            child: const Text("OK"),
+            onPressed: () {
+              if (SecondGame.answers.length == 3) {
+                setState(() {
+                  SecondGame.answers = [];
+                });
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (BuildContext context) {
+                  return const SuccessScreen();
+                }));
+              } else {
+                HapticFeedback.heavyImpact();
+                setState(() {
+                  SecondGame.answers = [];
+                });
+              }
+            },
+          ),
+        ),
+      ],
     );
   }
 
   Widget buildItem(double top, double left, String item, double width,
       double height, BuildContext context) {
-    String path = 'assets/images/$item.png';
-    Color color;
-    double borderWidth;
-    if (item == "mistery") {
-      color = Colors.transparent;
-      borderWidth = 0;
-    } else if (SecondGameScreen.answer == item) {
-      color = Colors.green;
-      borderWidth = 3.5;
+    String path = "";
+    if (item == 'crib') {
+      path = 'assets/images/$item.jpeg';
     } else {
-      color = Colors.pink;
-      borderWidth = 3.5;
+      path = 'assets/images/$item.png';
     }
     return Positioned(
+      // center
       top: MediaQuery.of(context).size.height * top,
       left: MediaQuery.of(context).size.width * left,
-      child: GestureDetector(
-        onTap: () {
-          if (item == "binhnuoc1") {
-            setState(() => SecondGameScreen.answer = "binhnuoc1");
-          } else if (item == "binhnuoc2") {
-            setState(() => SecondGameScreen.answer = "binhnuoc2");
-          } else if (item == "binhnuoc3") {
-            setState(() => SecondGameScreen.answer = "binhnuoc3");
-          }
-        },
-        onDoubleTap: () {
-          _showMyDialog(item);
-          if (item == "binhnuoc1") {
-            setState(() {
-              SecondGameScreen.answer = "binhnuoc1";
-              SecondGameScreen.isAnswerChoosen = true;
-            });
-          } else if (item == "binhnuoc2") {
-            setState(() {
-              SecondGameScreen.answer = "binhnuoc2";
-              SecondGameScreen.isAnswerChoosen = true;
-            });
-          } else if (item == "binhnuoc3") {
-            setState(() {
-              SecondGameScreen.answer = "binhnuoc3";
-              SecondGameScreen.isAnswerChoosen = true;
-            });
-          }
-        },
-        child: Container(
-          decoration: BoxDecoration(
-            border: Border.all(color: color, width: borderWidth),
-            borderRadius: BorderRadius.circular(15),
-          ),
-          child: Image.asset(
-            path,
-            fit: BoxFit.contain,
-            width: MediaQuery.of(context).size.width * width,
-            height: MediaQuery.of(context).size.height * height,
-          ),
-        ),
-      ),
-    );
-  }
-
-  Future<void> _showMyDialog(String item) async {
-    return showDialog<void>(
-      context: context,
-      barrierDismissible: false, // user must tap button!
-      builder: (BuildContext context) {
-        return AlertDialog(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(15)),
-          ),
-          backgroundColor: Colors.pinkAccent,
-          title: item != "binhnuoc1"
-              ? Text(
-                  'Bạn chọn sai rồi 😔',
-                  style: TextStyle(color: Colors.white),
-                )
-              : Text(
-                  'Bạn chọn đúng rồi 😄',
-                  style: TextStyle(color: Colors.white),
-                ),
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: <Widget>[
-                item != "binhnuoc1"
-                    ? Text(
-                        'Bạn chọn sai rồi. Hãy chọn lại nhé',
-                        style: TextStyle(color: Colors.black),
-                      )
-                    : Text(
-                        'Bạn chọn đúng rồi. Cùng xem giải thích nhé !',
-                        style: TextStyle(color: Colors.black),
-                      ),
-              ],
-            ),
-          ),
-          actions: <Widget>[
-            TextButton(
-              child: Text(
-                'Đóng',
-                style: TextStyle(color: Colors.white),
+      child: item != "baby"
+          ? GestureDetector(
+              onTap: () {
+                setState(() {
+                  SecondGame.answers.add(item);
+                });
+              },
+              child: Image.asset(
+                path,
+                fit: BoxFit.contain,
+                width: MediaQuery.of(context).size.width * width,
+                height: MediaQuery.of(context).size.height * height,
               ),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
+            )
+          : Image.asset(
+              path,
+              fit: BoxFit.contain,
+              width: MediaQuery.of(context).size.width * width,
+              height: MediaQuery.of(context).size.height * height,
             ),
-            TextButton(
-              child: item != "binhnuoc1"
-                  ? Text(
-                      'Chọn lại',
-                      style: TextStyle(
-                        color: Colors.white,
-                      ),
-                    )
-                  : Text(
-                      'Giải thích',
-                      style: TextStyle(
-                        color: Colors.white,
-                      ),
-                    ),
-              onPressed: () {
-                item != "binhnuoc1"
-                    ? Navigator.of(context).pop()
-                    : Navigator.of(context).push(
-                        MaterialPageRoute(builder: (BuildContext context) {
-                        return ExplainScreenGame2();
-                      }));
-              },
-            ),
-          ],
-        );
-      },
     );
   }
 }

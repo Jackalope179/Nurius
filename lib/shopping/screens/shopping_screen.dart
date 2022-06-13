@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nurnius/firestore/fire_store_config.dart';
 
+// ignore: must_be_immutable
 class ShoppingScreen extends StatelessWidget {
   ShoppingScreen({Key? key}) : super(key: key);
   FireStoreConnection? firestore = FireStoreConnection.getFireStoreInstance();
@@ -11,11 +12,11 @@ class ShoppingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        foregroundColor: Color(0xFF000000),
-        backgroundColor: Color(0xFFF9F6F0),
+        foregroundColor: const Color(0xFF000000),
+        backgroundColor: const Color(0xFFF9F6F0),
         title: Text(
           'Mua sắm'.toUpperCase(),
-          style: TextStyle(letterSpacing: 2),
+          style: const TextStyle(letterSpacing: 2),
         ),
       ),
       body: Padding(
@@ -73,7 +74,7 @@ class ShoppingScreen extends StatelessWidget {
       width: MediaQuery.of(context).size.width * 0.9,
       child: TextFormField(
         decoration: InputDecoration(
-          prefixIcon: Icon(Icons.search),
+          prefixIcon: const Icon(Icons.search),
           hintText: 'Tìm kiếm',
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(25),
@@ -84,7 +85,7 @@ class ShoppingScreen extends StatelessWidget {
   }
 
   Widget buildListProduct(int type, bool extraDetail) {
-    var stream;
+    Stream<QuerySnapshot<Object>>? stream;
     switch (type) {
       case 0:
         stream = firestore?.getProducts();
@@ -137,10 +138,10 @@ class ShoppingScreen extends StatelessWidget {
                   return Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      color: Color(0xFFFFFFFF),
+                      color: const Color(0xFFFFFFFF),
                       // border
                       border: Border.all(
-                        color: Color(0xffF9F6F0),
+                        color: const Color(0xffF9F6F0),
                         width: 3,
                       ),
                     ),
@@ -221,7 +222,7 @@ class ShoppingScreen extends StatelessWidget {
               ),
             );
           } else {
-            return Text("No data");
+            return const Text("No data");
           }
         }
       },

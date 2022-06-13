@@ -17,17 +17,13 @@ class GoogleSignInProvider extends ChangeNotifier {
       final googleUser = await _googleSignIn.signIn();
       if (googleUser == null) return;
       _user = googleUser;
-
       final googleAuth = await googleUser.authentication;
 
       final credential = GoogleAuthProvider.credential(
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
       );
-
       await FirebaseAuth.instance.signInWithCredential(credential);
-      // UserCredential userCredential =
-      //     await FirebaseAuth.instance.signInWithCredential(credential);
     } catch (e) {
       throw ("There's maybe a problem: $e");
     }

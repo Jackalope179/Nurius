@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nurnius/game/screens/FirstGame/explain.dart';
-import 'package:nurnius/game/screens/next_screen.dart';
+import 'package:nurnius/game/screens/SecondGame/explain.dart';
+import 'package:nurnius/game/screens/third_game_screen.dart';
 
 class SuccessScreen extends StatefulWidget {
   const SuccessScreen({Key? key}) : super(key: key);
@@ -14,12 +14,12 @@ class _SuccessScreenState extends State<SuccessScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Color(0xFFF9F6F0),
+        backgroundColor: const Color(0xFFF9F6F0),
         body: Center(
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),
-              color: Color(0xFFFC2288),
+              color: const Color(0xFFFC2288),
             ),
             width: MediaQuery.of(context).size.width * 0.6,
             height: MediaQuery.of(context).size.height * 0.47,
@@ -28,7 +28,7 @@ class _SuccessScreenState extends State<SuccessScreen> {
               children: [
                 Text(
                   "chúc mừng bạn đã qua màn".toUpperCase(),
-                  style: TextStyle(fontSize: 20, color: Colors.white),
+                  style: const TextStyle(fontSize: 20, color: Colors.white),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -43,12 +43,12 @@ class _SuccessScreenState extends State<SuccessScreen> {
                           borderRadius: BorderRadius.circular(20),
                         ),
                       ),
-                      child: Text("Lí do"),
+                      child: const Text("Lí do"),
                       onPressed: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (BuildContext context) {
-                              return ExplainScreen();
+                              return const ExplainScreenGame2();
                             },
                           ),
                         );
@@ -63,12 +63,12 @@ class _SuccessScreenState extends State<SuccessScreen> {
                           borderRadius: BorderRadius.circular(20),
                         ),
                       ),
-                      child: Text("Qua màn"),
+                      child: const Text("Qua màn"),
                       onPressed: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (BuildContext context) {
-                              return NextScreen();
+                              return const ThirdGameScreen();
                             },
                           ),
                         );

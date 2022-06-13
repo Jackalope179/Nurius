@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:nurnius/game/screens/FirstGame/successful.dart';
-// import 'package:flutter/services.dart';
+import 'package:nurnius/game/screens/FirstGame/explain.dart';
 
 class FirstGame extends StatefulWidget {
   const FirstGame({Key? key}) : super(key: key);
-  static var answers = [];
+  static String answer = "";
+  static bool isAnswerChoosen = false;
+
   @override
   State<FirstGame> createState() => _FirstGameState();
 }
@@ -13,58 +13,14 @@ class FirstGame extends StatefulWidget {
 class _FirstGameState extends State<FirstGame> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Stack(
+    return Scaffold(
+      backgroundColor: const Color(0xFFF9F6F0),
+      body: Stack(
         children: [
-          buildItem(0, 0, 'crib', 1, 1, context),
-          FirstGame.answers.contains("pillow")
-              ? Container()
-              : buildItem(0.2, 0.3, 'pillow', 0.4, 0.4, context),
-          FirstGame.answers.contains('baby')
-              ? Container()
-              : buildItem(0.3, 0.2, 'baby', 0.6, 0.6, context),
-          FirstGame.answers.contains('remote')
-              ? Container()
-              : buildItem(0.4, 0.15, 'remote', 0.3, 0.3, context),
-          FirstGame.answers.contains('phone')
-              ? Container()
-              : buildItem(0.4, 0.6, 'phone', 0.3, 0.3, context),
-          FirstGame.answers.contains('bear')
-              ? Container()
-              : buildItem(0.5, 0.6, 'bear', 0.3, 0.3, context),
-          Positioned(
-            // center
-            top: MediaQuery.of(context).size.height * 0.8,
-            left: MediaQuery.of(context).size.width * 0.4,
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                fixedSize: Size(MediaQuery.of(context).size.width * 0.2,
-                    MediaQuery.of(context).size.height * 0.15),
-                primary: Colors.pink,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
-                ),
-              ),
-              child: Text("OK"),
-              onPressed: () {
-                print(FirstGame.answers);
-                if (FirstGame.answers.length == 3) {
-                  setState(() {
-                    FirstGame.answers = [];
-                  });
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (BuildContext context) {
-                    return SuccessScreen();
-                  }));
-                } else {
-                  HapticFeedback.heavyImpact();
-                  setState(() {
-                    FirstGame.answers = [];
-                  });
-                }
-              },
-            ),
-          ),
+          buildItem(.1, .4, "mistery", .2, .4, context),
+          buildItem(.6, .1, "binhnuoc1", .15, .3, context),
+          buildItem(.6, .4, "binhnuoc2", .15, .3, context),
+          buildItem(.6, .7, "binhnuoc3", .15, .3, context),
         ],
       ),
     );
@@ -72,36 +28,137 @@ class _FirstGameState extends State<FirstGame> {
 
   Widget buildItem(double top, double left, String item, double width,
       double height, BuildContext context) {
-    String path = "";
-    if (item == 'crib') {
-      path = 'assets/images/$item.jpeg';
+    String path = 'assets/images/$item.png';
+    Color color;
+    double borderWidth;
+    if (item == "mistery") {
+      color = Colors.transparent;
+      borderWidth = 0;
+    } else if (FirstGame.answer == item) {
+      color = Colors.green;
+      borderWidth = 3.5;
     } else {
-      path = 'assets/images/$item.png';
+      color = Colors.pink;
+      borderWidth = 3.5;
     }
     return Positioned(
-      // center
       top: MediaQuery.of(context).size.height * top,
       left: MediaQuery.of(context).size.width * left,
-      child: item != "baby"
-          ? GestureDetector(
-              onTap: () {
-                setState(() {
-                  FirstGame.answers.add(item);
-                });
-              },
-              child: Image.asset(
-                path,
-                fit: BoxFit.contain,
-                width: MediaQuery.of(context).size.width * width,
-                height: MediaQuery.of(context).size.height * height,
-              ),
-            )
-          : Image.asset(
-              path,
-              fit: BoxFit.contain,
-              width: MediaQuery.of(context).size.width * width,
-              height: MediaQuery.of(context).size.height * height,
+      child: GestureDetector(
+        onTap: () {
+          if (item == "binhnuoc1") {
+            setState(() => FirstGame.answer = "binhnuoc1");
+          } else if (item == "binhnuoc2") {
+            setState(() => FirstGame.answer = "binhnuoc2");
+          } else if (item == "binhnuoc3") {
+            setState(() => FirstGame.answer = "binhnuoc3");
+          }
+        },
+        onDoubleTap: () {
+          _showMyDialog(item);
+          if (item == "binhnuoc1") {
+            setState(() {
+              FirstGame.answer = "binhnuoc1";
+              FirstGame.isAnswerChoosen = true;
+            });
+          } else if (item == "binhnuoc2") {
+            setState(() {
+              FirstGame.answer = "binhnuoc2";
+              FirstGame.isAnswerChoosen = true;
+            });
+          } else if (item == "binhnuoc3") {
+            setState(() {
+              FirstGame.answer = "binhnuoc3";
+              FirstGame.isAnswerChoosen = true;
+            });
+          }
+        },
+        child: Container(
+          decoration: BoxDecoration(
+            border: Border.all(color: color, width: borderWidth),
+            borderRadius: BorderRadius.circular(15),
+          ),
+          child: Image.asset(
+            path,
+            fit: BoxFit.contain,
+            width: MediaQuery.of(context).size.width * width,
+            height: MediaQuery.of(context).size.height * height,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Future<void> _showMyDialog(String item) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(15)),
+          ),
+          backgroundColor: Colors.pinkAccent,
+          title: item != "binhnuoc1"
+              ? const Text(
+                  'Bạn chọn sai rồi 😔',
+                  style: TextStyle(color: Colors.white),
+                )
+              : const Text(
+                  'Bạn chọn đúng rồi 😄',
+                  style: TextStyle(color: Colors.white),
+                ),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                item != "binhnuoc1"
+                    ? const Text(
+                        'Bạn chọn sai rồi. Hãy chọn lại nhé',
+                        style: TextStyle(color: Colors.black),
+                      )
+                    : const Text(
+                        'Bạn chọn đúng rồi. Cùng xem giải thích nhé !',
+                        style: TextStyle(color: Colors.black),
+                      ),
+              ],
             ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text(
+                'Đóng',
+                style: TextStyle(color: Colors.white),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: item != "binhnuoc1"
+                  ? const Text(
+                      'Chọn lại',
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    )
+                  : const Text(
+                      'Giải thích',
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+              onPressed: () {
+                item != "binhnuoc1"
+                    ? Navigator.of(context).pop()
+                    : Navigator.of(context).push(
+                        MaterialPageRoute(builder: (BuildContext context) {
+                        return const ExplainScreenGame1();
+                      }));
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }

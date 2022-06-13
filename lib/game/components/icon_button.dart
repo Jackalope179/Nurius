@@ -10,9 +10,11 @@ class IconButtonWidget extends StatelessWidget {
       required this.iconColor,
       required this.icon})
       : super(key: key);
+  // ignore: prefer_typing_uninitialized_variables
   var position;
   double iconSize;
   Color iconColor;
+  // ignore: prefer_typing_uninitialized_variables
   var icon;
 
   @override

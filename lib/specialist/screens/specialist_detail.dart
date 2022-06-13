@@ -62,7 +62,7 @@ class _SpecialistDetailScreenState extends State<SpecialistDetailScreen> {
         int index,
       ) {
         return ListTile(
-          title: Text("- " + widget.roles[index]),
+          title: Text("- ${widget.roles[index]}"),
         );
       },
     );
@@ -126,10 +126,10 @@ class _SpecialistDetailScreenState extends State<SpecialistDetailScreen> {
         ElevatedButton(
           style: ButtonStyle(
             backgroundColor: MaterialStateProperty.all<Color>(
-              Color(0xFFFC2288),
+              const Color(0xFFFC2288),
             ),
             foregroundColor: MaterialStateProperty.all<Color>(
-              Color(0xFF000000),
+              const Color(0xFF000000),
             ),
             fixedSize: MaterialStateProperty.all<Size>(
               Size(
@@ -152,7 +152,7 @@ class _SpecialistDetailScreenState extends State<SpecialistDetailScreen> {
                 backgroundColor:
                     MaterialStateProperty.all<Color>(Colors.yellow),
                 foregroundColor: MaterialStateProperty.all<Color>(
-                  Color(0xFF000000),
+                  const Color(0xFF000000),
                 ),
                 fixedSize: MaterialStateProperty.all<Size>(
                   Size(
@@ -176,7 +176,7 @@ class _SpecialistDetailScreenState extends State<SpecialistDetailScreen> {
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
                 foregroundColor: MaterialStateProperty.all<Color>(
-                  Color(0xFF000000),
+                  const Color(0xFF000000),
                 ),
                 fixedSize: MaterialStateProperty.all<Size>(
                   Size(

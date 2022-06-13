@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:nurnius/common/utils.dart';
+import 'package:nurnius/game/screens/second_game_screen.dart';
 
 class FinalScreen extends StatelessWidget {
   const FinalScreen({Key? key}) : super(key: key);
@@ -12,12 +12,12 @@ class FinalScreen extends StatelessWidget {
       child: Scaffold(
         body: Column(
           children: [
-            Container(
+            SizedBox(
               height: MediaQuery.of(context).size.height * 0.2,
               child: Center(
                 child: Text(
                   "Giải thích".toUpperCase(),
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: Colors.black,
                       fontSize: 20,
                       fontWeight: FontWeight.bold),
@@ -29,8 +29,8 @@ class FinalScreen extends StatelessWidget {
               children: [
                 Container(
                   decoration: BoxDecoration(
-                    color: Color(0xFFFFBAD2),
-                    borderRadius: BorderRadius.all(
+                    color: const Color(0xFFFFBAD2),
+                    borderRadius: const BorderRadius.all(
                       Radius.circular(20),
                     ),
                     border: Border.all(
@@ -116,10 +116,13 @@ class FinalScreen extends StatelessWidget {
                   width: MediaQuery.of(context).size.width * 0.2,
                   child: IconButton(
                     onPressed: () {
-                      Navigator.of(context).popUntil((route) => route.isFirst);
+                      Utils.navigateForwardfunction(
+                          context, const SecondGameScreen());
+                      // Navigator.of(context).popUntil((route) => route.isFirst);
                     },
+                    // ignore: prefer_const_constructors
                     icon: Icon(
-                      size: 50,
+                      size: 50.0,
                       FontAwesomeIcons.forward,
                       color: Colors.black,
                     ),

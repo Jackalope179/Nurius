@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import 'package:nurnius/game/screens/game_screen.dart';
+import 'package:nurnius/game/screens/intro_game_screen.dart';
 import 'package:nurnius/homepage/screens/home_page.dart';
 import 'package:nurnius/provider/google_sign_in.dart';
 import 'package:nurnius/shopping/screens/shopping_screen.dart';
@@ -13,20 +13,21 @@ import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
 class NavigationDrawerWidget extends StatelessWidget {
-  NavigationDrawerWidget({Key? key, this.userWithNormalLogin, this.user})
-      : super(key: key);
+  NavigationDrawerWidget({Key? key}) : super(key: key);
 
   final padding = const EdgeInsets.symmetric(horizontal: 20);
-  User? user;
-  var userWithNormalLogin;
+  User? user = FirebaseAuth.instance.currentUser;
 
   @override
   Widget build(BuildContext context) {
-    final name = user != null ? user!.displayName! : userWithNormalLogin.name;
-    final email = user != null ? user!.email! : userWithNormalLogin.email;
-    final urlImage = user != null
-        ? user!.photoURL!
-        : "https://cdn1.iconfinder.com/data/icons/people-49/512/_nerd_man-512.png";
+    final name = user!.displayName!;
+    final email = user!.email!;
+    final urlImage = user!.photoURL!;
+
+    // final name = "Random";
+    // final email = "Random";
+    // final urlImage =
+    //     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQphqmpunOcktIYDIfRzoWH76GnevhjUbgkw-KYFu2mT0uIavZDs4V_Ekyl_c8UTE95wX4&usqp=CAU";
 
     return Drawer(
       child: Material(
