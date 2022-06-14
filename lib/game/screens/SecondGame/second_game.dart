@@ -45,7 +45,7 @@ class _SecondGameState extends State<SecondGame> {
             ),
             child: const Text("OK"),
             onPressed: () {
-              if (SecondGame.answers.length == 3) {
+              if (SecondGame.answers.length == 4) {
                 setState(() {
                   SecondGame.answers = [];
                 });

@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:nurnius/common/utils.dart';
-import 'package:nurnius/game/screens/third_game_screen.dart';
+import 'package:nurnius/game/screens/ThirdGame/explain2.dart';
 
-class ExplainScreenGame2 extends StatefulWidget {
-  const ExplainScreenGame2({Key? key}) : super(key: key);
+class ExplainFirstGame3 extends StatefulWidget {
+  const ExplainFirstGame3({Key? key}) : super(key: key);
 
   @override
-  State<ExplainScreenGame2> createState() => _ExplainScreenGame2State();
+  State<ExplainFirstGame3> createState() => _ExplainFirstGame3State();
 }
 
-class _ExplainScreenGame2State extends State<ExplainScreenGame2> {
+class _ExplainFirstGame3State extends State<ExplainFirstGame3> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,8 +68,10 @@ class _ExplainScreenGame2State extends State<ExplainScreenGame2> {
                                   borderRadius: BorderRadius.circular(20),
                                 ),
                               ),
-                              child: const Text("Lý do"),
-                              onPressed: () {},
+                              child: const Text("Quay lai"),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
                             ),
                             ElevatedButton(
                               style: ElevatedButton.styleFrom(
@@ -81,10 +83,10 @@ class _ExplainScreenGame2State extends State<ExplainScreenGame2> {
                                   borderRadius: BorderRadius.circular(20),
                                 ),
                               ),
-                              child: const Text("Qua màn"),
+                              child: const Text("Tiếp theo"),
                               onPressed: () {
                                 Utils.navigateForwardfunction(
-                                    context, const ThirdGameScreen());
+                                    context, const ExplainSecondGame3());
                               },
                             ),
                           ],
@@ -100,37 +102,39 @@ class _ExplainScreenGame2State extends State<ExplainScreenGame2> {
                           padding: const EdgeInsets.all(10),
                           child: Column(children: [
                             const Text(
-                              "Trước khi đặt em bé của bạn trong bất kỳ cái nôi nào – cho dù nôi mới hay nôi dùng lại; nôi ở nhà bạn hay ở nhà trẻ, nhà họ hàng của bạn – phải đảm bảo rằng:",
+                              "Hãy tham khảo một số lưu ý sau đây để có thể sắp xếp một căn phòng phù hợp cho bé nhé:",
                               style: TextStyle(
                                   color: Colors.pink,
                                   fontWeight: FontWeight.bold),
                             ),
-                            buildText(
-                                "Các thanh chắn không cách nhau hơn 6cm và không bị lỏng lẻo, nứt vỡ hoặc bị thiếu."),
-                            buildText(
-                                "Không có lỗ hổng để trang trí ở hai đầu nôi, tránh cho các bé có thể bị kẹt vào những chỗ này."),
-                            buildText("Không có cạnh sắc nhọn hoặc răng cưa."),
-                            buildText(
-                                "Hai bên có chốt an toàn, và trẻ không thể tự mở chốt."),
-                            buildText(
-                                "Các góc nôi được gắn chặt và không cao quá 1,5 mm."),
-                            buildText(
-                                "Tấm trải vừa khít với nệm (không bao giờ sử dụng tấm trải cho người lớn)."),
-                            buildText(
-                                "Nệm vừa khít với các cạnh của nôi và không có khoảng cách lớn giữa nệm và nôi."),
-                            buildText(
-                                "Nệm vẫn ở nguyên vị trí khi con của bạn đứng trong nôi."),
-                            buildText("Nệm cứng, không mềm."),
-                            buildText(
-                                "Không để đồ chơi mềm, bông, chăn, và gối (gối người lớn, gối ôm hoặc gối vòng giữ trẻ sơ sinh) "),
-                            buildText(
-                                "Không nên sử dụng miếng chắn nôi. Nếu phải dùng miếng chắn nôi, tránh dùng các loại giống như gối và sử dụng các loại để gắn ở phía dưới đầu và bạn cũng có thể mua loại chắn bằng lưới để giữ đầu và chân tay của em bé trong nôi."),
-                            buildText(
-                                "Nếu sử dụng miếng chắn nôi, phải tháo ra khi em bé bắt đầu có khả năng vịn và đứng lên để bé không sử dụng chúng để cố gắng trèo ra khỏi nôi."),
-                            buildText(
-                                "Không để đồ chơi treo nôi có dây hoặc ruy-băng dài hơn 18cm phía trên nôi."),
-                            buildText(
-                                "Đồ chơi treo nôi phải được gỡ bỏ sau khi bé bắt đầu có thể dùng tay và đầu gối đẩy cơ thể lên, hoặc khi bé 5 tháng tuổi, tùy theo thời điểm đến trước vì trẻ có nguy cơ nghẹt thở khi chúng có thể với tới các đồ chơi này"),
+                            const SizedBox(
+                              height: 30,
+                            ),
+                            Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  SizedBox(
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.3,
+                                    height: MediaQuery.of(context).size.height *
+                                        0.6,
+                                    child: Image.asset(
+                                      "assets/images/closet1.png",
+                                      fit: BoxFit.contain,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.4,
+                                    child: const Text(
+                                      "Tủ sát đất sẽ tránh được việc bé bị cụng đầu khi chơi quanh khu vực dưới tủ. Những tủ có ngăn kéo thấp sẽ hạn chế việc bé bị té hoặc tủ đè khi bé níu, kéo ngăn kéo tủ. Bên cạnh đó, có cây xanh sẽ làm tăng thêm khả năng quan sát của bé, giúp bé thấy được sự thay đổi của cây qua từng ngày.",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                      overflow: TextOverflow.visible,
+                                    ),
+                                  ),
+                                ])
                           ]),
                         ),
                       ],

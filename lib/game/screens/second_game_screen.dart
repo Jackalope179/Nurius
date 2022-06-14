@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nurnius/common/progress_bar.dart';
 import 'package:nurnius/common/review_btn.dart';
 import 'package:nurnius/common/utils.dart';
 import 'package:nurnius/game/screens/SecondGame/second_game.dart';
@@ -16,23 +17,27 @@ class _SecondGameScreenState extends State<SecondGameScreen> {
   bool isPressed = false;
   @override
   Widget build(BuildContext context) {
-    if (MediaQuery.of(context).size.width - left < 100) {
+    if (MediaQuery.of(context).size.width * 0.6 - left < 100) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
+        ProgressBar.mana -= 0.3;
         Utils.navigateForwardfunction(context, const SecondGame());
-        // Navigator.pushReplacement(
-        //     context, MaterialPageRoute(builder: (_) => const FirstGame()));
       });
     }
     return SafeArea(
       child: Scaffold(
         body: Stack(children: [
           Image.asset(
-            'assets/images/bg2.png',
+            'assets/images/bg1.png',
             fit: BoxFit.cover,
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
           ),
-          const ReviewButton(),
+          Positioned(
+            top: 0,
+            left: MediaQuery.of(context).size.width * 0.3,
+            child: const ProgressBar(),
+          ),
+          ReviewButton(screen: "SecondGameScreen"),
           AnimatedPositioned(
             duration: const Duration(milliseconds: 100),
             top: MediaQuery.of(context).size.height * 0.5,
@@ -89,7 +94,7 @@ class _SecondGameScreenState extends State<SecondGameScreen> {
                   }
                   await Future.delayed(const Duration(milliseconds: 100));
                 } while (isPressed &&
-                    MediaQuery.of(context).size.width - left >= 100);
+                    MediaQuery.of(context).size.width * 0.6 - left >= 100);
               },
               onLongPressEnd: (_) {
                 setState(() => isPressed = false);

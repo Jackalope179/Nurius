@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nurnius/common/utils.dart';
 import 'package:nurnius/game/screens/SecondGame/explain.dart';
 import 'package:nurnius/game/screens/third_game_screen.dart';
 
@@ -45,13 +46,8 @@ class _SuccessScreenState extends State<SuccessScreen> {
                       ),
                       child: const Text("Lí do"),
                       onPressed: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (BuildContext context) {
-                              return const ExplainScreenGame2();
-                            },
-                          ),
-                        );
+                        Utils.navigateForwardfunction(
+                            context, const ExplainScreenGame2());
                       },
                     ),
                     ElevatedButton(
@@ -65,13 +61,8 @@ class _SuccessScreenState extends State<SuccessScreen> {
                       ),
                       child: const Text("Qua màn"),
                       onPressed: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (BuildContext context) {
-                              return const ThirdGameScreen();
-                            },
-                          ),
-                        );
+                        Utils.navigateForwardfunction(
+                            context, const ThirdGameScreen());
                       },
                     ),
                   ],

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nurnius/common/utils.dart';
 import 'package:nurnius/homepage/screens/home_page.dart';
 
 class SignInButton extends StatelessWidget {
@@ -35,11 +36,7 @@ class SignInButton extends StatelessWidget {
             ),
           )),
       onPressed: () {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => HomePage(),
-          ),
-        );
+        Utils.navigateForwardfunction(context, HomePage());
       },
       child: const Text(
         "Đăng nhập",

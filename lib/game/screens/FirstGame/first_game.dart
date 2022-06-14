@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nurnius/common/utils.dart';
 import 'package:nurnius/game/screens/FirstGame/explain.dart';
 
 class FirstGame extends StatefulWidget {
@@ -150,10 +151,8 @@ class _FirstGameState extends State<FirstGame> {
               onPressed: () {
                 item != "binhnuoc1"
                     ? Navigator.of(context).pop()
-                    : Navigator.of(context).push(
-                        MaterialPageRoute(builder: (BuildContext context) {
-                        return const ExplainScreenGame1();
-                      }));
+                    : Utils.navigateForwardfunction(
+                        context, const ExplainScreenGame1());
               },
             ),
           ],

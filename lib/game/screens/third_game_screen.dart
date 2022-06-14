@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nurnius/common/progress_bar.dart';
 import 'package:nurnius/common/review_btn.dart';
 import 'package:nurnius/common/utils.dart';
 import 'package:nurnius/game/screens/ThirdGame/third_game.dart';
@@ -30,7 +31,12 @@ class _ThirdGameScreenState extends State<ThirdGameScreen> {
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
           ),
-          const ReviewButton(),
+          Positioned(
+            top: 0,
+            left: MediaQuery.of(context).size.width * 0.3,
+            child: const ProgressBar(),
+          ),
+          ReviewButton(screen: "ThirdGameScreen"),
           AnimatedPositioned(
             duration: const Duration(milliseconds: 100),
             top: MediaQuery.of(context).size.height * 0.5,

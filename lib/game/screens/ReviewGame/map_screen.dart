@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:nurnius/common/Utils.dart';
 import 'package:nurnius/game/screens/ReviewGame/questions_screen.dart';
 
+// ignore: must_be_immutable
 class MapScreen extends StatefulWidget {
-  const MapScreen({Key? key}) : super(key: key);
+  MapScreen({Key? key, required this.screen}) : super(key: key);
+  String screen;
 
   @override
   State<MapScreen> createState() => _MapScreenState();
@@ -38,7 +40,8 @@ class _MapScreenState extends State<MapScreen> {
           if (content != "1") {
             _showMyDialog();
           } else {
-            Utils.navigateForwardfunction(context, const QuestionScreen());
+            Utils.navigateForwardfunction(
+                context, QuestionScreen(screen: widget.screen));
           }
         },
         child: CircleAvatar(

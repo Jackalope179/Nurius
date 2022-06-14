@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:nurnius/common/utils.dart';
 import 'package:nurnius/firestore/fire_store_config.dart';
 import 'package:nurnius/provider/storage_service.dart';
 import 'package:nurnius/specialist/screens/specialist_detail.dart';
@@ -62,17 +63,15 @@ class _SpecialitsScreenState extends State<SpecialitsScreen> {
 
                         return GestureDetector(
                           onTap: () => {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => SpecialistDetailScreen(
+                            Utils.navigateForwardfunction(
+                                context,
+                                SpecialistDetailScreen(
                                   image: image,
                                   detail: specialistList[index]["Degree"] +
                                       " " +
                                       specialistList[index]["Name"],
                                   roles: specialistList[index]["Details"],
-                                ),
-                              ),
-                            ),
+                                ))
                           },
                           child: specialistDetail(
                             context_,

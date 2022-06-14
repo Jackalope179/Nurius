@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:nurnius/common/utils.dart';
 import 'package:nurnius/game/screens/FirstGame/final.dart';
 
 class MilkScreen extends StatefulWidget {
@@ -197,10 +198,8 @@ class _MilkScreenState extends State<MilkScreen>
               ),
               onPressed: () {
                 correct
-                    ? Navigator.of(context).push(
-                        MaterialPageRoute(builder: (BuildContext context) {
-                        return const FinalScreen();
-                      }))
+                    ? Utils.navigateForwardfunction(
+                        context, const FinalScreen())
                     : Navigator.of(context).pop();
               },
             ),

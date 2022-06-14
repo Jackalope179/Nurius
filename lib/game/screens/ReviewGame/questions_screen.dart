@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:nurnius/common/utils.dart';
+import 'package:nurnius/game/screens/ReviewGame/review_game_screen.dart';
 
+// ignore: must_be_immutable
 class QuestionScreen extends StatefulWidget {
-  const QuestionScreen({Key? key}) : super(key: key);
-
+  QuestionScreen({Key? key, required this.screen}) : super(key: key);
+  String screen;
   @override
   State<QuestionScreen> createState() => _QuestionScreenState();
 }
@@ -40,6 +43,10 @@ class _QuestionScreenState extends State<QuestionScreen> {
   int totalCorrect = 0;
   @override
   Widget build(BuildContext context) {
+    if (currentQuestion == listQuestion.length) {
+      currentQuestion = 2;
+    }
+
     return SafeArea(
       child: Scaffold(
         body: Column(
@@ -257,10 +264,16 @@ class _QuestionScreenState extends State<QuestionScreen> {
                   currentQuestion++;
                   totalCorrect++;
                 });
-                if (currentQuestion == listQuestion.length - 1) {
-                  _showResult(totalCorrect);
+                if (currentQuestion == listQuestion.length) {
+                  Utils.navigateForwardfunction(
+                      context,
+                      ReviewGameScreenResult(
+                        totoalCorrectAnswers: totalCorrect,
+                        screen: widget.screen,
+                      ));
+                } else {
+                  Navigator.of(context).pop();
                 }
-                Navigator.of(context).pop();
               },
             ),
           ],
@@ -306,54 +319,17 @@ class _QuestionScreenState extends State<QuestionScreen> {
                 setState(() {
                   currentQuestion++;
                 });
-                if (currentQuestion == listQuestion.length - 1) {
-                  _showResult(totalCorrect);
-                }
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
 
-  Future<void> _showResult(int correctAnswer) async {
-    return showDialog<void>(
-      context: context,
-      barrierDismissible: false, // user must tap button!
-      builder: (BuildContext context) {
-        return AlertDialog(
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(15)),
-          ),
-          backgroundColor: Colors.pinkAccent,
-          title: Text(
-            "kết quả".toUpperCase(),
-            textAlign: TextAlign.center,
-            style: const TextStyle(color: Colors.white, fontSize: 20),
-          ),
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: <Widget>[
-                Text(
-                  "bạn trả lời đúng $correctAnswer/3 câu hỏi".toUpperCase(),
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                      color: Color(0xff000f9a), fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-          ),
-          actions: <Widget>[
-            TextButton(
-              child: const Text(
-                'Tiếp theo',
-                style: TextStyle(color: Colors.white),
-              ),
-              onPressed: () {
-                int count = 0;
-                Navigator.of(context).popUntil((_) => count++ >= 3);
+                if (currentQuestion == listQuestion.length) {
+                  Utils.navigateForwardfunction(
+                      context,
+                      ReviewGameScreenResult(
+                        totoalCorrectAnswers: totalCorrect,
+                        screen: widget.screen,
+                      ));
+                } else {
+                  Navigator.of(context).pop();
+                }
               },
             ),
           ],

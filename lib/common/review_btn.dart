@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:nurnius/common/utils.dart';
 import 'package:nurnius/game/screens/ReviewGame/map_screen.dart';
 
+// ignore: must_be_immutable
 class ReviewButton extends StatelessWidget {
-  const ReviewButton({Key? key}) : super(key: key);
-
+  ReviewButton({Key? key, required this.screen}) : super(key: key);
+  String screen;
   @override
   Widget build(BuildContext context) {
     return Positioned(
@@ -13,13 +15,11 @@ class ReviewButton extends StatelessWidget {
         child: IconButton(
             color: const Color(0xFF7E7063),
             onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (BuildContext context) {
-                    return const MapScreen();
-                  },
-                ),
-              );
+              Utils.navigateForwardfunction(
+                  context,
+                  MapScreen(
+                    screen: screen,
+                  ));
             },
             iconSize: 45,
             icon: const Icon(FontAwesomeIcons.bookBible)));

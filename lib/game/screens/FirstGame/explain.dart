@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:nurnius/common/utils.dart';
 import 'package:nurnius/game/screens/FirstGame/milk.dart';
 
 class ExplainScreenGame1 extends StatefulWidget {
@@ -112,9 +113,8 @@ class _ExplainScreenGame1State extends State<ExplainScreenGame1> {
                   ),
                   IconButton(
                       onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const MilkScreen(),
-                        ));
+                        Utils.navigateForwardfunction(
+                            context, const MilkScreen());
                       },
                       icon: const Icon(
                         FontAwesomeIcons.forward,

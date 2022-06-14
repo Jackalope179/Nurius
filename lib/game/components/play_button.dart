@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nurnius/game/screens/third_game_screen.dart';
+import 'package:nurnius/common/progress_bar.dart';
+import 'package:nurnius/common/utils.dart';
 import 'package:nurnius/game/screens/first_game_screen.dart';
 
 class PlayButtonWidget extends StatelessWidget {
@@ -33,10 +34,8 @@ class PlayButtonWidget extends StatelessWidget {
             ),
           )),
       onPressed: () {
-        Navigator.of(context)
-            .push(MaterialPageRoute(builder: (BuildContext context) {
-          return const ThirdGameScreen();
-        }));
+        ProgressBar.mana -= 0.3;
+        Utils.navigateForwardfunction(context, const FirstGameScreen());
       },
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,

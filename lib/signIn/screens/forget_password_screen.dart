@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
+import 'package:nurnius/common/utils.dart';
 import 'package:nurnius/signIn/screens/confirm_email_screen.dart';
 
 class ForgetPasswordScreen extends StatefulWidget {
@@ -115,11 +116,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
           // ignore: empty_catches
         } catch (e) {}
         // ignore: use_build_context_synchronously
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => const ConfirmEmailScreen(),
-          ),
-        );
+        Utils.navigateForwardfunction(context, const ConfirmEmailScreen());
       },
       child: const Text(
         "Lấy lại mật khẩu",

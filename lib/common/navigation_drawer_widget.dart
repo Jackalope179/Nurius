@@ -2,6 +2,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:nurnius/common/utils.dart';
 
 import 'package:nurnius/game/screens/intro_game_screen.dart';
 import 'package:nurnius/homepage/screens/home_page.dart';
@@ -20,9 +21,13 @@ class NavigationDrawerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final name = user!.displayName!;
-    final email = user!.email!;
-    final urlImage = user!.photoURL!;
+    // final name = user!.displayName!;
+    const name = "Nurnius User";
+    // final email = user!.email!;
+    const email = "Nurnius@gmail.com";
+    // final urlImage = user!.photoURL!;
+    const urlImage =
+        "https://static.vecteezy.com/system/resources/thumbnails/002/002/403/small/man-with-beard-avatar-character-isolated-icon-free-vector.jpg";
 
     // final name = "Random";
     // final email = "Random";
@@ -118,14 +123,17 @@ class NavigationDrawerWidget extends StatelessWidget {
                   ),
                 ],
               ),
-              Text(
-                textAlign: TextAlign.left,
-                email,
-                style: const TextStyle(
-                  fontSize: 10,
-                  color: Colors.grey,
+              Align(
+                alignment: const Alignment(-0.3, 0),
+                child: Text(
+                  textAlign: TextAlign.left,
+                  email,
+                  style: const TextStyle(
+                    fontSize: 10,
+                    color: Colors.grey,
+                  ),
+                  overflow: TextOverflow.ellipsis,
                 ),
-                overflow: TextOverflow.ellipsis,
               ),
             ],
           ),
@@ -153,26 +161,18 @@ class NavigationDrawerWidget extends StatelessWidget {
 
     switch (index) {
       case 0:
-        Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => HomePage(),
-        ));
+        Utils.navigateForwardfunction(context, HomePage());
         break;
       case 1:
-        Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => const GameScreen(),
-        ));
+        Utils.navigateForwardfunction(context, const GameScreen());
         break;
       case 2:
-        Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => ShoppingScreen(),
-        ));
+        Utils.navigateForwardfunction(context, ShoppingScreen());
         break;
       case 3:
         break;
       case 4:
-        Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => const SpecialitsScreen(),
-        ));
+        Utils.navigateForwardfunction(context, const SpecialitsScreen());
         break;
       case 5:
         final provier =

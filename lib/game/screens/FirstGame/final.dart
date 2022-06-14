@@ -118,7 +118,6 @@ class FinalScreen extends StatelessWidget {
                     onPressed: () {
                       Utils.navigateForwardfunction(
                           context, const SecondGameScreen());
-                      // Navigator.of(context).popUntil((route) => route.isFirst);
                     },
                     // ignore: prefer_const_constructors
                     icon: Icon(
