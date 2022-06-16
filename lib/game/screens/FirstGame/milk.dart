@@ -185,7 +185,7 @@ class _MilkScreenState extends State<MilkScreen>
               children: <Widget>[
                 Text(
                   content,
-                  style: const TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Colors.black),
                 ),
               ],
             ),

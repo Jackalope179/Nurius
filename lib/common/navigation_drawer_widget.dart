@@ -21,18 +21,9 @@ class NavigationDrawerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final name = user!.displayName!;
-    const name = "Nurnius User";
-    // final email = user!.email!;
-    const email = "Nurnius@gmail.com";
-    // final urlImage = user!.photoURL!;
-    const urlImage =
-        "https://static.vecteezy.com/system/resources/thumbnails/002/002/403/small/man-with-beard-avatar-character-isolated-icon-free-vector.jpg";
-
-    // final name = "Random";
-    // final email = "Random";
-    // final urlImage =
-    //     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQphqmpunOcktIYDIfRzoWH76GnevhjUbgkw-KYFu2mT0uIavZDs4V_Ekyl_c8UTE95wX4&usqp=CAU";
+    final name = user!.displayName!;
+    final email = user!.email!;
+    final urlImage = user!.photoURL!;
 
     return Drawer(
       child: Material(

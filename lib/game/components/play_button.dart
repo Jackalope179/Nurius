@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nurnius/common/progress_bar.dart';
 import 'package:nurnius/common/utils.dart';
+import 'package:nurnius/game/screens/ThirdGame/explain1.dart';
 import 'package:nurnius/game/screens/first_game_screen.dart';
 
 class PlayButtonWidget extends StatelessWidget {
@@ -34,7 +35,7 @@ class PlayButtonWidget extends StatelessWidget {
             ),
           )),
       onPressed: () {
-        ProgressBar.mana -= 0.3;
+        // ProgressBar.mana -= 0.3;
         Utils.navigateForwardfunction(context, const FirstGameScreen());
       },
       child: Row(

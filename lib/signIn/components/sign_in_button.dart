@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:nurnius/common/utils.dart';
-import 'package:nurnius/homepage/screens/home_page.dart';
 
-class SignInButton extends StatelessWidget {
+class SignInButton extends StatefulWidget {
   const SignInButton({Key? key, required this.email, required this.password})
       : super(key: key);
   final String password;
   final String email;
 
+  @override
+  State<SignInButton> createState() => _SignInButtonState();
+}
+
+class _SignInButtonState extends State<SignInButton> {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
@@ -35,8 +38,26 @@ class SignInButton extends StatelessWidget {
               borderRadius: BorderRadius.circular(15),
             ),
           )),
-      onPressed: () {
-        Utils.navigateForwardfunction(context, HomePage());
+      onPressed: () async {
+        print(widget.email + widget.password);
+
+        // FireStoreConnection? firestore =
+        //     FireStoreConnection.getFireStoreInstance();
+        // if (await firestore!.isUnvalidUser(email, password)) {
+        //   Utils.showSnackBar(
+        //     context,
+        //     'Invalid username or password',
+        //   );
+        // } else {
+        //   var user = firestore.getUser(email, password);
+        // Utils.navigateForwardfunction(
+        //     context,
+        //     HomePage(
+        //       email: email,
+        //       password: password,
+        //       username: user.snapshot.data()['username'],
+        //     ));
+        // }
       },
       child: const Text(
         "Đăng nhập",

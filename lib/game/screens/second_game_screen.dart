@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nurnius/common/exit_btn.dart';
 import 'package:nurnius/common/progress_bar.dart';
 import 'package:nurnius/common/review_btn.dart';
 import 'package:nurnius/common/utils.dart';
@@ -32,6 +33,7 @@ class _SecondGameScreenState extends State<SecondGameScreen> {
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
           ),
+          ExitBtn(),
           Positioned(
             top: 0,
             left: MediaQuery.of(context).size.width * 0.3,

@@ -38,12 +38,12 @@ class _ExplainScreenGame1State extends State<ExplainScreenGame1> {
                 children: [
                   Container(
                     decoration: BoxDecoration(
-                      border: Border.all(color: Colors.blue, width: 3),
+                      // border: Border.all(color: Colors.black, width: 3),
                       borderRadius: BorderRadius.circular(20),
                       color: const Color(0xFFFFBAD2),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.blue.withOpacity(0.5),
+                          color: const Color(0xFFFFBAD2),
                           spreadRadius: 3,
                           blurRadius: 3,
                           offset: const Offset(0, 3),

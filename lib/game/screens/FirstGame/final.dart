@@ -34,7 +34,7 @@ class FinalScreen extends StatelessWidget {
                       Radius.circular(20),
                     ),
                     border: Border.all(
-                      color: Colors.blueAccent,
+                      color: Colors.transparent,
                       width: 3,
                     ),
                   ),

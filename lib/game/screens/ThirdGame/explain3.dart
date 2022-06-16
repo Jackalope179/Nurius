@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nurnius/common/utils.dart';
 import 'package:nurnius/game/screens/ThirdGame/end_screen.dart';
+import 'package:nurnius/game/screens/ThirdGame/explain3.dart';
 
 class ExplainThirdGame3 extends StatefulWidget {
   const ExplainThirdGame3({Key? key}) : super(key: key);
@@ -32,22 +34,18 @@ class _ExplainThirdGame3State extends State<ExplainThirdGame3> {
             ),
             Container(
               decoration: BoxDecoration(
-                border: Border.all(color: Colors.blue, width: 3),
                 borderRadius: BorderRadius.circular(20),
-                color: const Color(0xFFDD36A4),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.blue.withOpacity(0.5),
-                    spreadRadius: 3,
-                    blurRadius: 3,
-                    // changes position of shadow to only bottom right
-                    offset: const Offset(0, 3),
-                  ),
-                ],
+                color: Color(0xFFF9F6F0),
               ),
-              width: MediaQuery.of(context).size.width * 0.9,
-              height: MediaQuery.of(context).size.height * 0.75,
+              width: MediaQuery.of(context).size.width * 0.85,
+              height: MediaQuery.of(context).size.height * 0.7,
               child: Flex(direction: Axis.horizontal, children: [
+                IconButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  icon: Icon(FontAwesomeIcons.backward),
+                ),
                 Expanded(
                     child: SingleChildScrollView(
                   scrollDirection: Axis.vertical,
@@ -57,52 +55,24 @@ class _ExplainThirdGame3State extends State<ExplainThirdGame3> {
                       children: [
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                fixedSize: Size(
-                                    MediaQuery.of(context).size.width * 0.2,
-                                    MediaQuery.of(context).size.height * 0.15),
-                                primary: Colors.blueAccent,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                              ),
-                              child: const Text("Quay lai"),
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                            ),
-                            ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                fixedSize: Size(
-                                    MediaQuery.of(context).size.width * 0.2,
-                                    MediaQuery.of(context).size.height * 0.15),
-                                primary: Colors.blueAccent,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                              ),
-                              child: const Text("Tiếp theo"),
-                              onPressed: () {
-                                Utils.navigateForwardfunction(
-                                    context, const EndScreen());
-                              },
-                            ),
-                          ],
+                          children: [],
                         ),
                         const SizedBox(
                           height: 15,
                         ),
                         Container(
-                          decoration: const BoxDecoration(
-                            color: Color(0xFFF9F6F0),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFF9F6F0),
                             borderRadius: BorderRadius.all(Radius.circular(20)),
+                            border: Border.all(
+                              color: const Color(0xFF7E7063),
+                              width: 2,
+                            ),
                           ),
                           padding: const EdgeInsets.all(10),
                           child: Column(children: [
                             const Text(
-                              "Giường sát đất sẽ tránh được việc bé bị cụng đầu khi chơi quanh khu vực gần gầm giường, các góc giường được bo tròn sẽ an toàn hơn khi bé vô tình va vào các góc giường.",
+                              "Hãy tham khảo một số lưu ý sau đây để có thể sắp xếp một căn phòng phù hợp cho bé nhé:",
                               style: TextStyle(
                                   color: Colors.pink,
                                   fontWeight: FontWeight.bold),
@@ -118,7 +88,7 @@ class _ExplainThirdGame3State extends State<ExplainThirdGame3> {
                                     width:
                                         MediaQuery.of(context).size.width * 0.3,
                                     height: MediaQuery.of(context).size.height *
-                                        0.6,
+                                        0.4,
                                     child: Image.asset(
                                       "assets/images/bed1.png",
                                       fit: BoxFit.contain,
@@ -126,9 +96,9 @@ class _ExplainThirdGame3State extends State<ExplainThirdGame3> {
                                   ),
                                   SizedBox(
                                     width:
-                                        MediaQuery.of(context).size.width * 0.4,
+                                        MediaQuery.of(context).size.width * 0.3,
                                     child: const Text(
-                                      "Tủ sát đất sẽ tránh được việc bé bị cụng đầu khi chơi quanh khu vực dưới tủ. Những tủ có ngăn kéo thấp sẽ hạn chế việc bé bị té hoặc tủ đè khi bé níu, kéo ngăn kéo tủ. Bên cạnh đó, có cây xanh sẽ làm tăng thêm khả năng quan sát của bé, giúp bé thấy được sự thay đổi của cây qua từng ngày.",
+                                      "Giường sát đất sẽ tránh được việc bé bị cụng đầu khi chơi quanh khu vực gần gầm giường, các góc giường được bo tròn sẽ an toàn hơn khi bé vô tình va vào các góc giường.",
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold),
                                       overflow: TextOverflow.visible,
@@ -141,6 +111,12 @@ class _ExplainThirdGame3State extends State<ExplainThirdGame3> {
                     ),
                   ),
                 )),
+                IconButton(
+                  onPressed: () {
+                    Utils.navigateForwardfunction(context, const EndScreen());
+                  },
+                  icon: Icon(FontAwesomeIcons.forward),
+                ),
               ]),
             ),
           ]),

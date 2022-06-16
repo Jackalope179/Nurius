@@ -10,8 +10,9 @@ class ReviewButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Positioned(
-        top: MediaQuery.of(context).size.height * 0.01,
-        left: MediaQuery.of(context).size.width * 0.01,
+        // top: MediaQuery.of(context).size.height * 0.01,
+        top: 0,
+        left: MediaQuery.of(context).size.width * 0.065,
         child: IconButton(
             color: const Color(0xFF7E7063),
             onPressed: () {
@@ -21,7 +22,7 @@ class ReviewButton extends StatelessWidget {
                     screen: screen,
                   ));
             },
-            iconSize: 45,
-            icon: const Icon(FontAwesomeIcons.bookBible)));
+            iconSize: 35,
+            icon: const Icon(FontAwesomeIcons.mapLocation)));
   }
 }

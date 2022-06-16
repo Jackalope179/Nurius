@@ -8,7 +8,6 @@ import 'package:nurnius/signIn/components/usename_input_field.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({Key? key}) : super(key: key);
-
   @override
   State<SignIn> createState() => _SignInState();
 }
@@ -19,6 +18,7 @@ class _SignInState extends State<SignIn> {
 
   @override
   Widget build(BuildContext context) {
+    bool keyboardIsUp = MediaQuery.of(context).viewInsets.bottom > 0.0;
     return Scaffold(
       backgroundColor: const Color(0xFFF9F6F0),
       resizeToAvoidBottomInset: true,
@@ -57,14 +57,22 @@ class _SignInState extends State<SignIn> {
                       email: emailController.text,
                       password: passwordController.text,
                     ),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.05,
-                    ),
-                    const Text("Hoặc"),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.03,
-                    ),
-                    const GoogleSignInButton(),
+                    keyboardIsUp
+                        ? Container()
+                        : Column(
+                            children: [
+                              SizedBox(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.05,
+                              ),
+                              const Text("Hoặc"),
+                              SizedBox(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.03,
+                              ),
+                              const GoogleSignInButton(),
+                            ],
+                          ),
                   ],
                 ),
               )

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:nurnius/common/exit_btn.dart';
 import 'package:nurnius/common/progress_bar.dart';
 import 'package:nurnius/common/review_btn.dart';
 import 'package:nurnius/common/utils.dart';
@@ -32,6 +34,7 @@ class _FirstGameScreenState extends State<FirstGameScreen> {
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
           ),
+          ExitBtn(),
           Positioned(
             top: 0,
             left: MediaQuery.of(context).size.width * 0.3,

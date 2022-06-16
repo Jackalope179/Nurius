@@ -44,8 +44,9 @@ class EndScreen extends StatelessWidget {
                 style: TextStyle(color: Colors.white),
               ),
               onPressed: () {
-                Navigator.of(context)
-                    .popUntil((route) => route.settings.name == "GameScreen");
+                Navigator.of(context).popUntil(
+                    (route) => route.settings.name == "FirstGameScreen");
+                Navigator.of(context).pop();
                 ProgressBar.mana = 1;
               },
             ),

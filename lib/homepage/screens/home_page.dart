@@ -6,9 +6,16 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 // ignore: must_be_immutable
 class HomePage extends StatefulWidget {
-  HomePage({Key? key}) : super(key: key);
-  // var userWithNormalLogin;
+  HomePage({
+    Key? key,
+  }) : super(key: key);
   User? user = FirebaseAuth.instance.currentUser;
+//   String username;
+//   String password;
+//   String email;
+//  required this.username,
+//       required this.email,
+//       required this.password
   @override
   State<HomePage> createState() => _HomePageState();
 }
