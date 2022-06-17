@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:nurnius/common/utils.dart';
+import 'package:nurnius/homepage/screens/home_page.dart';
 
 class SignInButton extends StatefulWidget {
   const SignInButton({Key? key, required this.email, required this.password})
@@ -39,7 +41,7 @@ class _SignInButtonState extends State<SignInButton> {
             ),
           )),
       onPressed: () async {
-        print(widget.email + widget.password);
+        Utils.navigateForwardfunction(context, HomePage());
 
         // FireStoreConnection? firestore =
         //     FireStoreConnection.getFireStoreInstance();

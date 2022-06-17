@@ -6,9 +6,12 @@ import 'package:nurnius/common/utils.dart';
 import 'package:nurnius/game/screens/ThirdGame/end_screen.dart';
 import 'package:nurnius/game/screens/ThirdGame/third_game.dart';
 
+// ignore: must_be_immutable
 class ThirdGameScreen extends StatefulWidget {
-  ThirdGameScreen({Key? key, required this.done}) : super(key: key);
+  ThirdGameScreen({Key? key, required this.done, required this.replay})
+      : super(key: key);
   bool done = false;
+  bool replay;
   @override
   State<ThirdGameScreen> createState() => _ThirdGameScreenState();
 }
@@ -42,7 +45,7 @@ class _ThirdGameScreenState extends State<ThirdGameScreen> {
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
           ),
-          ExitBtn(),
+          const ExitBtn(),
           Positioned(
             top: -25,
             left: MediaQuery.of(context).size.width * 0.3,

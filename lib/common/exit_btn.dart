@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nurnius/common/utils.dart';
 
@@ -8,8 +7,6 @@ class ExitBtn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // global key for the exit button
-    final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
     return Align(
       alignment: Alignment.topLeft,
       child: IconButton(

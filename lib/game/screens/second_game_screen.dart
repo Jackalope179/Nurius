@@ -5,9 +5,10 @@ import 'package:nurnius/common/review_btn.dart';
 import 'package:nurnius/common/utils.dart';
 import 'package:nurnius/game/screens/SecondGame/second_game.dart';
 
+// ignore: must_be_immutable
 class SecondGameScreen extends StatefulWidget {
-  const SecondGameScreen({Key? key}) : super(key: key);
-
+  SecondGameScreen({Key? key, required this.replay}) : super(key: key);
+  bool replay;
   @override
   State<SecondGameScreen> createState() => _SecondGameScreenState();
 }
@@ -20,7 +21,9 @@ class _SecondGameScreenState extends State<SecondGameScreen> {
   Widget build(BuildContext context) {
     if (MediaQuery.of(context).size.width * 0.6 - left < 100) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        ProgressBar.mana -= 0.3;
+        if (!widget.replay) {
+          ProgressBar.mana -= 0.3;
+        }
         Utils.navigateForwardfunction(context, const SecondGame());
       });
     }
@@ -33,7 +36,7 @@ class _SecondGameScreenState extends State<SecondGameScreen> {
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
           ),
-          ExitBtn(),
+          const ExitBtn(),
           Positioned(
             top: -25,
             left: MediaQuery.of(context).size.width * 0.3,

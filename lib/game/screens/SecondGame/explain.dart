@@ -23,7 +23,7 @@ class _ExplainScreenGame2State extends State<ExplainScreenGame2> {
             child: Column(children: [
               Row(
                 children: [
-                  ExitBtn(),
+                  const ExitBtn(),
                   Container(
                     alignment: Alignment.center,
                     width: MediaQuery.of(context).size.width * 0.9,
@@ -111,11 +111,11 @@ class _ExplainScreenGame2State extends State<ExplainScreenGame2> {
                                 ),
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 20,
                             ),
                             IconButton(
-                              icon: Icon(FontAwesomeIcons.forward),
+                              icon: const Icon(FontAwesomeIcons.forward),
                               // style: ElevatedButton.styleFrom(
                               //   fixedSize: Size(
                               //       MediaQuery.of(context).size.width * 0.2,
@@ -131,6 +131,7 @@ class _ExplainScreenGame2State extends State<ExplainScreenGame2> {
                                     context,
                                     ThirdGameScreen(
                                       done: false,
+                                      replay: false,
                                     ));
                               },
                             ),

@@ -2,7 +2,6 @@
 import "package:firebase_core/firebase_core.dart";
 import 'package:flutter/material.dart';
 import 'package:nurnius/app.dart';
-import 'package:nurnius/homepage/screens/home_page.dart';
 import 'package:nurnius/provider/google_sign_in.dart';
 // ignore: depend_on_referenced_packages
 import 'package:provider/provider.dart';
@@ -31,9 +30,9 @@ void main(List<String> args) async {
 
   SharedPreferences prefs = await SharedPreferences.getInstance();
   prefs.getBool("FirstGamePlayed") ?? prefs.setBool("FirstGamePlayed", false);
-  prefs.getBool("SecondGamePlayed") ?? prefs.setBool("SecondGamePlayed", false);
-  prefs.getBool("ThirdGamePlayed") ?? prefs.setBool("ThirdGamePlayed", false);
   prefs.getBool("ReviewGamePlayed") ?? prefs.setBool("ReviewGamePlayed", false);
+  // prefs.getBool("ThirdGamePlayed") ?? prefs.setBool("ThirdGamePlayed", false);
+  // prefs.getBool("ReviewGamePlayed") ?? prefs.setBool("ReviewGamePlayed", false);
 
   runApp(const MyApp());
 }
@@ -54,7 +53,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: HomePage(),
+        home: NuriusApp(),
       ),
     );
   }

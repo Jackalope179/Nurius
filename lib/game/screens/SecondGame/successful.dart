@@ -67,6 +67,7 @@ class _SuccessScreenState extends State<SuccessScreen> {
                             context,
                             ThirdGameScreen(
                               done: false,
+                              replay: false,
                             ));
                       },
                     ),

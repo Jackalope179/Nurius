@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:audio_service/audio_service.dart';
 
 class Utils {
   static void navigateForwardfunction(BuildContext context, Widget widget) {
@@ -34,14 +33,14 @@ class Utils {
           title: Text(
             title,
             textAlign: TextAlign.center,
-            style: TextStyle(color: Colors.white),
+            style: const TextStyle(color: Colors.white),
           ),
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
                 Text(
                   text,
-                  style: TextStyle(color: Colors.black),
+                  style: const TextStyle(color: Colors.black),
                 )
               ],
             ),

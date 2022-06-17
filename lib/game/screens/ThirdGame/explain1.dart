@@ -34,7 +34,7 @@ class _ExplainFirstGame3State extends State<ExplainFirstGame3> {
             Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                color: Color(0xFFF9F6F0),
+                color: const Color(0xFFF9F6F0),
               ),
               width: MediaQuery.of(context).size.width * 0.85,
               height: MediaQuery.of(context).size.height * 0.7,
@@ -43,7 +43,7 @@ class _ExplainFirstGame3State extends State<ExplainFirstGame3> {
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
-                  icon: Icon(FontAwesomeIcons.backward),
+                  icon: const Icon(FontAwesomeIcons.backward),
                 ),
                 Expanded(
                     child: SingleChildScrollView(
@@ -54,7 +54,7 @@ class _ExplainFirstGame3State extends State<ExplainFirstGame3> {
                       children: [
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [],
+                          children: const [],
                         ),
                         const SizedBox(
                           height: 15,
@@ -62,7 +62,8 @@ class _ExplainFirstGame3State extends State<ExplainFirstGame3> {
                         Container(
                           decoration: BoxDecoration(
                             color: const Color(0xFFF9F6F0),
-                            borderRadius: BorderRadius.all(Radius.circular(20)),
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(20)),
                             border: Border.all(
                               color: const Color(0xFF7E7063),
                               width: 2,
@@ -115,7 +116,7 @@ class _ExplainFirstGame3State extends State<ExplainFirstGame3> {
                     Utils.navigateForwardfunction(
                         context, const ExplainSecondGame3());
                   },
-                  icon: Icon(FontAwesomeIcons.forward),
+                  icon: const Icon(FontAwesomeIcons.forward),
                 ),
               ]),
             ),

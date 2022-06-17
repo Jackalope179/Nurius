@@ -126,7 +126,10 @@ class FinalScreen extends StatelessWidget {
                     onPressed: () {
                       GameMetaData.FirstGamePlayed = true;
                       Utils.navigateForwardfunction(
-                          context, const SecondGameScreen());
+                          context,
+                          SecondGameScreen(
+                            replay: false,
+                          ));
                     },
                     // ignore: prefer_const_constructors
                     icon: Icon(

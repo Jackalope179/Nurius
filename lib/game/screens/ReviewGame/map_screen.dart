@@ -7,6 +7,8 @@ import 'package:nurnius/game/screens/ReviewGame/questions_screen.dart';
 import 'package:nurnius/game/screens/first_game_screen.dart';
 import 'package:nurnius/game/screens/second_game_screen.dart';
 import 'package:nurnius/game/screens/third_game_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
 
 // ignore: must_be_immutable
 class MapScreen extends StatefulWidget {
@@ -18,7 +20,101 @@ class MapScreen extends StatefulWidget {
 }
 
 class _MapScreenState extends State<MapScreen> {
+  List<TargetFocus> targets = [];
+  // GlobalKey key1 = GlobalKey();
+  GlobalKey key2 = GlobalKey();
+  GlobalKey key3 = GlobalKey();
+  GlobalKey key4 = GlobalKey();
+  GlobalKey key5 = GlobalKey();
   int number = 1;
+
+  void showTutorial() {
+    TutorialCoachMark tutorial = TutorialCoachMark(
+      context,
+      targets: targets, // List<TargetFocus>
+      colorShadow: Colors.blueAccent, // DEFAULT Colors.black
+      // alignSkip: Alignment.bottomRight,
+      opacityShadow: 0.7,
+      // textSkip: "SKIP",
+      // paddingFocus: 10,
+    )..show();
+  }
+
+  @override
+  void initState() {
+    checkPlayed();
+    super.initState();
+  }
+
+  void checkPlayed() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    // ignore: non_constant_identifier_names
+    bool? ReviewGamePlayed = prefs.getBool('ReviewGamePlayed');
+    if (ReviewGamePlayed != null && ReviewGamePlayed == false) {
+      initTargets();
+      WidgetsBinding.instance.addPostFrameCallback((_afterLayout) {
+        showTutorial();
+      });
+    }
+    await prefs.setBool('ReviewGamePlayed', true);
+  }
+
+  void _afterLayout() {
+    Future.delayed(const Duration(microseconds: 100));
+  }
+
+  void initTargets() {
+    targets.add(TargetFocus(identify: "Target 2", keyTarget: key2, contents: [
+      TargetContent(
+          align: ContentAlign.bottom,
+          child: Container(
+              child: Column(
+            children: [
+              Text(
+                "Quay lại màn hình game".toUpperCase(),
+                style: const TextStyle(
+                  fontSize: 25,
+                  color: Colors.white,
+                ),
+              )
+            ],
+          ))),
+    ]));
+    targets.add(TargetFocus(identify: "Target 3", keyTarget: key3, contents: [
+      TargetContent(
+          align: ContentAlign.top,
+          child: Container(
+              child: Column(
+            children: [
+              Text(
+                "Nhấn vào hình tròn để chọn màn chơi, màn chơi được mở khoá khi bạn đã chơi "
+                    .toUpperCase(),
+                style: const TextStyle(
+                  fontSize: 25,
+                  color: Colors.white,
+                ),
+              )
+            ],
+          ))),
+    ]));
+    targets.add(TargetFocus(identify: "Target 4", keyTarget: key4, contents: [
+      TargetContent(
+          align: ContentAlign.top,
+          child: Container(
+              child: Column(
+            children: [
+              Text(
+                "Nhấn vào lá cờ để vào màn review".toUpperCase(),
+                style: const TextStyle(
+                  fontSize: 25,
+                  color: Colors.white,
+                ),
+              )
+            ],
+          ))),
+    ]));
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -32,13 +128,14 @@ class _MapScreenState extends State<MapScreen> {
             height: MediaQuery.of(context).size.height,
           ),
           Positioned(
+            key: key2,
             top: 15,
             left: 20,
             child: IconButton(
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                icon: Icon(
+                icon: const Icon(
                   Icons.arrow_circle_left_outlined,
                   size: 45,
                 )),
@@ -46,22 +143,32 @@ class _MapScreenState extends State<MapScreen> {
           Positioned(
               top: -20,
               left: MediaQuery.of(context).size.width * 0.2,
-              child: ProgressBar()),
-          buildCircle(0.3, 0.15, "1"),
+              child: const ProgressBar()),
+          Container(key: key3, child: buildCircle(0.3, 0.15, "1")),
           buildCircle(0.55, 0.35, "2"),
           buildCircle(0.23, 0.54, "3"),
           buildCircle(0.58, 0.7, "4"),
           Positioned(
+            key: key4,
             top: MediaQuery.of(context).size.height * 0.25,
             left: MediaQuery.of(context).size.width * 0.65,
             child: IconButton(
                 onPressed: () {
-                  Utils.navigateForwardfunction(
-                      context, QuestionScreen(screen: widget.screen));
+                  if (GameMetaData.ThirdGamePlayed) {
+                    Utils.navigateForwardfunction(
+                        context, QuestionScreen(screen: widget.screen));
+                  } else {
+                    Utils.showMyDialog(
+                        context,
+                        'chưa thể mở review'.toUpperCase(),
+                        "Bạn phải chơi hết màn 3 mới mở được review");
+                  }
                 },
                 icon: Icon(
                   Icons.flag,
-                  color: Colors.red,
+                  color: GameMetaData.ThirdGamePlayed
+                      ? Colors.red
+                      : Colors.red[100],
                   size: 65,
                 )),
           ),
@@ -100,12 +207,17 @@ class _MapScreenState extends State<MapScreen> {
           }
 
           if (content == "1" && GameMetaData.FirstGamePlayed) {
-            Utils.navigateForwardfunction(context, FirstGameScreen());
+            Utils.navigateForwardfunction(
+                context, FirstGameScreen(replay: true));
           } else if (content == "2" && GameMetaData.SecondGamePlayed) {
-            Utils.navigateForwardfunction(context, SecondGameScreen());
+            Utils.navigateForwardfunction(
+                context, SecondGameScreen(replay: true));
           } else if (content == "3" && GameMetaData.ThirdGamePlayed) {
             Utils.navigateForwardfunction(
-                context, ThirdGameScreen(done: false));
+                context, ThirdGameScreen(done: false, replay: true));
+          } else {
+            Utils.showMyDialog(context, 'chưa thể mở màn chơi'.toUpperCase(),
+                "Bạn phải chơi  qua màn chơi này mới mở lại được");
           }
         },
         child: CircleAvatar(

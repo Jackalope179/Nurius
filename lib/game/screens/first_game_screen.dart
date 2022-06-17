@@ -1,6 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nurnius/common/exit_btn.dart';
 import 'package:nurnius/common/progress_bar.dart';
 import 'package:nurnius/common/review_btn.dart';
@@ -9,9 +7,10 @@ import 'package:nurnius/game/screens/FirstGame/first_game.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
 
+// ignore: must_be_immutable
 class FirstGameScreen extends StatefulWidget {
-  const FirstGameScreen({Key? key}) : super(key: key);
-
+  FirstGameScreen({Key? key, required this.replay}) : super(key: key);
+  bool replay;
   @override
   State<FirstGameScreen> createState() => _FirstGameScreenState();
 }
@@ -21,44 +20,33 @@ class _FirstGameScreenState extends State<FirstGameScreen> {
   double left = 0;
   bool isPressed = false;
   List<TargetFocus> targets = [];
-  GlobalKey key = GlobalKey();
-  GlobalKey key1 = GlobalKey();
+  // GlobalKey key1 = GlobalKey();
   GlobalKey key2 = GlobalKey();
-  // GlobalKey key3 = GlobalKey();
-  // GlobalKey keỹ = GlobalKey();
+  GlobalKey key3 = GlobalKey();
+  GlobalKey key4 = GlobalKey();
+  GlobalKey key5 = GlobalKey();
 
   @override
   void initState() {
-    initTargets();
-    WidgetsBinding.instance.addPostFrameCallback((_afterLayout) {
-      showTutorial();
-    });
+    checkPlayed();
+
     super.initState();
   }
 
-  void _afterLayout() {
-    Future.delayed(Duration(microseconds: 100));
-    showTutorial();
+  void checkPlayed() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    // ignore: non_constant_identifier_names
+    bool? FirstGamePlayed = prefs.getBool('FirstGamePlayed');
+    if (FirstGamePlayed != null && FirstGamePlayed == false) {
+      initTargets();
+      WidgetsBinding.instance.addPostFrameCallback((afterLayout) {
+        showTutorial();
+      });
+    }
+    await prefs.setBool('FirstGamePlayed', true);
   }
 
   void initTargets() {
-    targets.add(TargetFocus(identify: "Target 1", keyTarget: key1, contents: [
-      TargetContent(
-          align: ContentAlign.bottom,
-          child: Container(
-              child: Column(
-            children: [
-              Text(
-                "Hello",
-                style: TextStyle(
-                  fontSize: 25,
-                  color: Colors.red,
-                ),
-              )
-            ],
-          ))),
-    ]));
-
     targets.add(TargetFocus(identify: "Target 2", keyTarget: key2, contents: [
       TargetContent(
           align: ContentAlign.bottom,
@@ -66,10 +54,42 @@ class _FirstGameScreenState extends State<FirstGameScreen> {
               child: Column(
             children: [
               Text(
-                "Hello",
+                "Xem và lựa chọn các màn chơi mong muốn".toUpperCase(),
                 style: TextStyle(
                   fontSize: 25,
-                  color: Colors.red,
+                  color: Colors.white,
+                ),
+              )
+            ],
+          ))),
+    ]));
+    targets.add(TargetFocus(identify: "Target 3", keyTarget: key3, contents: [
+      TargetContent(
+          align: ContentAlign.top,
+          child: Container(
+              child: Column(
+            children: [
+              Text(
+                "Giữ nút để di chuyển em bé về phía sau".toUpperCase(),
+                style: TextStyle(
+                  fontSize: 25,
+                  color: Colors.white,
+                ),
+              )
+            ],
+          ))),
+    ]));
+    targets.add(TargetFocus(identify: "Target 4", keyTarget: key4, contents: [
+      TargetContent(
+          align: ContentAlign.top,
+          child: Container(
+              child: Column(
+            children: [
+              Text(
+                "Giữ nút để di chuyển em bé về phía trước".toUpperCase(),
+                style: TextStyle(
+                  fontSize: 25,
+                  color: Colors.white,
                 ),
               )
             ],
@@ -81,13 +101,14 @@ class _FirstGameScreenState extends State<FirstGameScreen> {
   Widget build(BuildContext context) {
     if (MediaQuery.of(context).size.width - left < 100) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        ProgressBar.mana -= 0.3;
+        if (!widget.replay) {
+          ProgressBar.mana -= 0.3;
+        }
         Utils.navigateForwardfunction(context, const FirstGame());
       });
     }
     return SafeArea(
       child: Scaffold(
-        key: key,
         body: Stack(children: [
           Image.asset(
             'assets/images/bg2.png',
@@ -98,14 +119,16 @@ class _FirstGameScreenState extends State<FirstGameScreen> {
           // create global key for button
 
           Container(
+            // key: key1,
             child: ExitBtn(),
           ),
           Positioned(
+            key: key5,
             top: -25,
             left: MediaQuery.of(context).size.width * 0.25,
             child: const ProgressBar(),
           ),
-          ReviewButton(screen: "FirstGameScreen"),
+          Container(key: key2, child: ReviewButton(screen: "FirstGameScreen")),
           AnimatedPositioned(
             duration: const Duration(milliseconds: 100),
             top: MediaQuery.of(context).size.height * 0.5,
@@ -122,7 +145,7 @@ class _FirstGameScreenState extends State<FirstGameScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             GestureDetector(
-              key: key1,
+              key: key3,
               onLongPressStart: (_) async {
                 isPressed = true;
                 do {
@@ -146,7 +169,7 @@ class _FirstGameScreenState extends State<FirstGameScreen> {
                   heroTag: 'btn1', child: createButton(2), onPressed: () {}),
             ),
             GestureDetector(
-              key: key2,
+              key: key4,
               onLongPressStart: (_) async {
                 isPressed = true;
                 do {

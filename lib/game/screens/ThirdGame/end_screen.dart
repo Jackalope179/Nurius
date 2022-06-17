@@ -1,8 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:nurnius/common/progress_bar.dart';
-import 'package:nurnius/common/utils.dart';
-import 'package:nurnius/game/screens/third_game_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class EndScreen extends StatelessWidget {
@@ -49,9 +47,9 @@ class EndScreen extends StatelessWidget {
                 style: TextStyle(color: Colors.white),
               ),
               onPressed: () async {
-                final Uri _url = Uri.parse(
+                final Uri url = Uri.parse(
                     'https://docs.google.com/forms/d/e/1FAIpQLScvMiqFdZpBAxmU30bkfFrLrN5sJOuLxt14zf-c1Ta6jrl__w/viewform');
-                if (!await launchUrl(_url)) throw 'Could not launch $_url';
+                if (!await launchUrl(url)) throw 'Could not launch $url';
               },
             ),
             OutlinedButton(
@@ -60,6 +58,7 @@ class EndScreen extends StatelessWidget {
                 style: TextStyle(color: Colors.white),
               ),
               onPressed: () {
+                ProgressBar.mana = 1;
                 Navigator.of(context)
                     .popUntil((route) => route.settings.name == "GameScreen");
               },

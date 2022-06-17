@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:nurnius/common/utils.dart';
-import 'package:nurnius/game/screens/ReviewGame/review_game_screen.dart';
 
 // ignore: must_be_immutable
 class Question1 extends StatefulWidget {
-  Question1({Key? key}) : super(key: key);
+  const Question1({Key? key}) : super(key: key);
   @override
   State<Question1> createState() => _Question1State();
 }
 
 class _Question1State extends State<Question1> {
+  // ignore: non_constant_identifier_names
   var Question = {
     'id': "1",
     'question':
@@ -75,7 +73,7 @@ class _Question1State extends State<Question1> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     width: 80,
                   ),
                   Container(

@@ -9,19 +9,12 @@ class FireStoreConnection {
   }
 
   Stream<QuerySnapshot<Object>> getUser(String email, String password) {
-    print('$email $password');
     var user = _firestore
         .collection('user')
         .where('email', isEqualTo: email)
         .where('password', isEqualTo: password)
         .snapshots();
     // get user name of user
-    print(user);
-    user.forEach((element) {
-      element.docs.forEach((doc) {
-        print(doc.data()['username']);
-      });
-    });
     return user;
   }
 

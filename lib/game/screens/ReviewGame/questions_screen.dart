@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nurnius/common/utils.dart';
 import 'package:nurnius/game/screens/ReviewGame/review_game_screen.dart';
 
@@ -199,11 +198,10 @@ class _QuestionScreenState extends State<QuestionScreen> {
           Positioned(
             top: 0,
             right: MediaQuery.of(context).size.width * 0.1,
-            child: Container(
+            child: SizedBox(
               width: MediaQuery.of(context).size.width * 0.05,
               child: IconButton(
                   onPressed: () {
-                    print(answer[choosenAnswer[currentQuestion]]);
                     if (answer[choosenAnswer[currentQuestion]] ==
                         listQuestion[currentQuestion]["correctAnswer"]) {
                       _showCorrectdialog();
@@ -305,7 +303,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
                   style: const TextStyle(
                       color: Color(0xff000f9a), fontWeight: FontWeight.bold),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Text(

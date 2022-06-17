@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:nurnius/common/utils.dart';
 
 class BulbBtn extends StatelessWidget {
@@ -21,7 +19,7 @@ class BulbBtn extends StatelessWidget {
             icon: Icon(
               Icons.lightbulb,
               color: Colors.yellow[800],
-              shadows: [
+              shadows: const [
                 BoxShadow(
                   color: Colors.yellow,
                   blurRadius: 20,

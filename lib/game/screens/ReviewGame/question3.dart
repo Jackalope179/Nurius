@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:nurnius/common/utils.dart';
-import 'package:nurnius/game/screens/ReviewGame/review_game_screen.dart';
 
 // ignore: must_be_immutable
 class Question3 extends StatefulWidget {
-  Question3({Key? key}) : super(key: key);
+  const Question3({Key? key}) : super(key: key);
   @override
   State<Question3> createState() => _Question3State();
 }
