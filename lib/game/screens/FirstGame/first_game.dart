@@ -22,10 +22,37 @@ class _FirstGameState extends State<FirstGame> {
         body: Stack(
           children: [
             ExitBtn(),
-            BulbBtn(
-                msg:
-                    "Bố mẹ hãy nhấn 2 lần vào vật dụng đúng \nđể bảo quản sữa mới được hút ra nhé"),
-            buildItem(.1, .4, "mistery", .2, .4, context),
+            // BulbBtn(
+            //     msg:
+            //         "Bố mẹ hãy nhấn 2 lần vào vật dụng đúng \nđể bảo quản sữa mới được hút ra nhé"),
+            Positioned(
+              top: 20,
+              left: MediaQuery.of(context).size.width * 0.15,
+              child: Align(
+                alignment: Alignment.center,
+                child: Container(
+                  width: MediaQuery.of(context).size.width * 0.7,
+                  height: MediaQuery.of(context).size.height * 0.15,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: const Color(0xFFFFBAD2),
+                  ),
+                  alignment: Alignment.center,
+                  child: const Text(
+                    "Bố mẹ hãy nhấn 2 lần vào vật dụng đúng \nđể bảo quản sữa mới được hút ra nhé",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 12,
+                      // unserline
+                      decoration: TextDecoration.none,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ),
+            ),
+            buildItem(.2, .4, "mistery", .2, .4, context),
             buildItem(.6, .1, "binhnuoc1", .15, .3, context),
             buildItem(.6, .4, "binhnuoc2", .15, .3, context),
             buildItem(.6, .7, "binhnuoc3", .15, .3, context),

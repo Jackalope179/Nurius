@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nurnius/common/metadata.dart';
+import 'package:nurnius/common/progress_bar.dart';
 import 'package:nurnius/common/utils.dart';
 import 'package:nurnius/game/screens/third_game_screen.dart';
 
@@ -115,6 +116,7 @@ class _ExplainThirdGame3State extends State<ExplainThirdGame3> {
                 IconButton(
                   onPressed: () {
                     GameMetaData.ThirdGamePlayed = true;
+                    ProgressBar.mana -= 0.3;
                     Utils.navigateForwardfunction(
                         context,
                         ThirdGameScreen(
