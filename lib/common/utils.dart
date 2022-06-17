@@ -19,4 +19,46 @@ class Utils {
     );
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
+
+  static Future<void> showMyDialog(
+      BuildContext context, String title, String text) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(15)),
+          ),
+          backgroundColor: Colors.pink[400],
+          title: Text(
+            title,
+            textAlign: TextAlign.center,
+            style: TextStyle(color: Colors.white),
+          ),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text(
+                  text,
+                  style: TextStyle(color: Colors.black),
+                )
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text(
+                'Đóng',
+                style: TextStyle(color: Colors.white),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
 }

@@ -35,7 +35,7 @@ class _SecondGameScreenState extends State<SecondGameScreen> {
           ),
           ExitBtn(),
           Positioned(
-            top: 0,
+            top: -25,
             left: MediaQuery.of(context).size.width * 0.3,
             child: const ProgressBar(),
           ),

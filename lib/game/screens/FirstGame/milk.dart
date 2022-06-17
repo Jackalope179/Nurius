@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:nurnius/common/bulb_btn.dart';
+import 'package:nurnius/common/exit_btn.dart';
 import 'package:nurnius/common/utils.dart';
 import 'package:nurnius/game/screens/FirstGame/final.dart';
 
@@ -41,23 +43,50 @@ class _MilkScreenState extends State<MilkScreen>
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Column(children: [
-                Align(
-                  alignment: Alignment.center,
-                  child: Container(
-                    width: MediaQuery.of(context).size.width * 0.8,
-                    height: MediaQuery.of(context).size.height * 0.15,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: const Color(0xFFFFBAD2),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    ExitBtn(),
+                    Align(
+                      alignment: Alignment.center,
+                      child: Container(
+                        width: MediaQuery.of(context).size.width * 0.7,
+                        height: MediaQuery.of(context).size.height * 0.15,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: const Color(0xFFFFBAD2),
+                        ),
+                        alignment: Alignment.center,
+                        child: const Text(
+                          "Đã đến lúc cho con uống sữa\n hãy điều chỉnh nhiệt độ hợp lý để rã đông sữa nhé",
+                          style: TextStyle(
+                              color: Colors.black, fontWeight: FontWeight.bold),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
                     ),
-                    alignment: Alignment.center,
-                    child: const Text(
-                      "Đã đến lúc cho con uống sữa\n hãy điều chỉnh nhiệt độ hợp lý để rã đông sữa nhé",
-                      style: TextStyle(
-                          color: Colors.black, fontWeight: FontWeight.bold),
-                      textAlign: TextAlign.center,
+                    SizedBox(
+                      width: 50,
+                      height: 50,
+                      child: IconButton(
+                          onPressed: () async {
+                            Utils.showMyDialog(context, "gợi ý".toUpperCase(),
+                                "Bạn hãy thử rã đông sữa trong \n khoảng nhiệt độ từ 35-45 độ nào");
+                          },
+                          icon: Icon(
+                            Icons.lightbulb,
+                            color: Colors.yellow[800],
+                            shadows: [
+                              BoxShadow(
+                                color: Colors.yellow,
+                                blurRadius: 20,
+                                offset: Offset(0, 0),
+                              ),
+                            ],
+                            size: 45,
+                          )),
                     ),
-                  ),
+                  ],
                 ),
                 const SizedBox(
                   height: 15,

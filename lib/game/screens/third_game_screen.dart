@@ -18,7 +18,7 @@ class _ThirdGameScreenState extends State<ThirdGameScreen> {
   bool isPressed = false;
   @override
   Widget build(BuildContext context) {
-    if (MediaQuery.of(context).size.width * 0.8 - left < 100) {
+    if (MediaQuery.of(context).size.width * 0.35 - left < 100) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         Utils.navigateForwardfunction(context, const ThirdGame());
       });
@@ -34,7 +34,7 @@ class _ThirdGameScreenState extends State<ThirdGameScreen> {
           ),
           ExitBtn(),
           Positioned(
-            top: 0,
+            top: -25,
             left: MediaQuery.of(context).size.width * 0.3,
             child: const ProgressBar(),
           ),
@@ -95,7 +95,7 @@ class _ThirdGameScreenState extends State<ThirdGameScreen> {
                   }
                   await Future.delayed(const Duration(milliseconds: 100));
                 } while (isPressed &&
-                    MediaQuery.of(context).size.width * 0.8 - left >= 100);
+                    MediaQuery.of(context).size.width * 0.35 - left >= 100);
               },
               onLongPressEnd: (_) {
                 setState(() => isPressed = false);

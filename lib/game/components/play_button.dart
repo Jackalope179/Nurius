@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:nurnius/common/progress_bar.dart';
 import 'package:nurnius/common/utils.dart';
-import 'package:nurnius/game/screens/ThirdGame/explain1.dart';
+import 'package:nurnius/game/screens/FirstGame/first_game.dart';
+import 'package:nurnius/game/screens/SecondGame/second_game.dart';
+import 'package:nurnius/game/screens/ThirdGame/result_screen.dart';
+import 'package:nurnius/game/screens/ThirdGame/third_game.dart';
 import 'package:nurnius/game/screens/first_game_screen.dart';
+import 'package:nurnius/game/screens/intro_game_screen.dart';
 
 class PlayButtonWidget extends StatelessWidget {
   const PlayButtonWidget({Key? key}) : super(key: key);
@@ -35,8 +38,7 @@ class PlayButtonWidget extends StatelessWidget {
             ),
           )),
       onPressed: () {
-        // ProgressBar.mana -= 0.3;
-        Utils.navigateForwardfunction(context, const FirstGameScreen());
+        Utils.navigateForwardfunction(context, FirstGameScreen());
       },
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,

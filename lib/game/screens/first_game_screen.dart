@@ -5,6 +5,7 @@ import 'package:nurnius/common/progress_bar.dart';
 import 'package:nurnius/common/review_btn.dart';
 import 'package:nurnius/common/utils.dart';
 import 'package:nurnius/game/screens/FirstGame/first_game.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class FirstGameScreen extends StatefulWidget {
   const FirstGameScreen({Key? key}) : super(key: key);
@@ -36,8 +37,8 @@ class _FirstGameScreenState extends State<FirstGameScreen> {
           ),
           ExitBtn(),
           Positioned(
-            top: 0,
-            left: MediaQuery.of(context).size.width * 0.3,
+            top: -25,
+            left: MediaQuery.of(context).size.width * 0.25,
             child: const ProgressBar(),
           ),
           ReviewButton(screen: "FirstGameScreen"),

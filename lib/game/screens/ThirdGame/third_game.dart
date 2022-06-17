@@ -57,25 +57,29 @@ class _ThirdGameState extends State<ThirdGame> {
                     Positioned(
                       bottom: MediaQuery.of(context).size.height * 0.005,
                       left: MediaQuery.of(context).size.width * 0.4,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          primary: Colors.pink[200],
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          fixedSize: const Size(150, 50),
-                        ),
-                        onPressed: () {
-                          Utils.navigateForwardfunction(
-                              context,
-                              ResultScreen(
-                                result: validateAnswer() * 5,
-                              ));
-                        },
-                        child: Text(
-                          'xác nhận'.toUpperCase(),
-                        ),
-                      ),
+                      child: !(itemList.contains("item1") ||
+                              itemList.contains("item2") ||
+                              itemList.contains("item3"))
+                          ? ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                primary: Colors.pink[200],
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                fixedSize: const Size(150, 50),
+                              ),
+                              onPressed: () {
+                                Utils.navigateForwardfunction(
+                                    context,
+                                    ResultScreen(
+                                      result: validateAnswer() * 5,
+                                    ));
+                              },
+                              child: Text(
+                                'xác nhận'.toUpperCase(),
+                              ),
+                            )
+                          : Container(),
                     )
                   ],
                 )),

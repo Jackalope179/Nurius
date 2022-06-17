@@ -16,25 +16,42 @@ class _ProgressBarState extends State<ProgressBar> {
     }
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 20),
-      width: 350,
-      height: 35,
-      child: ClipRRect(
-        borderRadius: const BorderRadius.all(Radius.circular(120)),
-        child: Stack(children: [
-          LinearProgressIndicator(
-            minHeight: 300,
-            value: ProgressBar.mana,
-            valueColor: AlwaysStoppedAnimation<Color>(Colors.pink[400]!),
-            backgroundColor: const Color(0xffD6D6D6),
-          ),
-          Align(
-            alignment: Alignment.center,
-            child: Text(
-              '${(ProgressBar.mana * 100).toInt()}',
-              style: const TextStyle(color: Colors.white),
+      width: 400,
+      height: 80,
+      child: Row(
+        children: [
+          Container(
+            width: 100,
+            height: 80,
+            padding: const EdgeInsets.all(0),
+            child: Image.asset(
+              'assets/images/milk_bottle.png',
+              fit: BoxFit.fill,
             ),
           ),
-        ]),
+          ClipRRect(
+            borderRadius: const BorderRadius.all(Radius.circular(120)),
+            child: SizedBox(
+              width: 300,
+              height: 35,
+              child: Stack(children: [
+                LinearProgressIndicator(
+                  minHeight: 300,
+                  value: ProgressBar.mana,
+                  valueColor: AlwaysStoppedAnimation<Color>(Colors.pink[400]!),
+                  backgroundColor: const Color(0xffD6D6D6),
+                ),
+                Align(
+                  alignment: Alignment.center,
+                  child: Text(
+                    '${(ProgressBar.mana * 100).toInt()}',
+                    style: const TextStyle(color: Colors.white),
+                  ),
+                ),
+              ]),
+            ),
+          ),
+        ],
       ),
     );
   }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:nurnius/common/bulb_btn.dart';
+import 'package:nurnius/common/exit_btn.dart';
 import 'package:nurnius/common/utils.dart';
 import 'package:nurnius/game/screens/FirstGame/explain.dart';
 
@@ -14,15 +16,21 @@ class FirstGame extends StatefulWidget {
 class _FirstGameState extends State<FirstGame> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFFF9F6F0),
-      body: Stack(
-        children: [
-          buildItem(.1, .4, "mistery", .2, .4, context),
-          buildItem(.6, .1, "binhnuoc1", .15, .3, context),
-          buildItem(.6, .4, "binhnuoc2", .15, .3, context),
-          buildItem(.6, .7, "binhnuoc3", .15, .3, context),
-        ],
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: const Color(0xFFF9F6F0),
+        body: Stack(
+          children: [
+            ExitBtn(),
+            BulbBtn(
+                msg:
+                    "Bố mẹ hãy nhấn 2 lần vào vật dụng đúng \nđể bảo quản sữa mới được hút ra nhé"),
+            buildItem(.1, .4, "mistery", .2, .4, context),
+            buildItem(.6, .1, "binhnuoc1", .15, .3, context),
+            buildItem(.6, .4, "binhnuoc2", .15, .3, context),
+            buildItem(.6, .7, "binhnuoc3", .15, .3, context),
+          ],
+        ),
       ),
     );
   }

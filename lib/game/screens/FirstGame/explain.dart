@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:nurnius/common/exit_btn.dart';
 import 'package:nurnius/common/utils.dart';
 import 'package:nurnius/game/screens/FirstGame/milk.dart';
 
@@ -20,14 +21,19 @@ class _ExplainScreenGame1State extends State<ExplainScreenGame1> {
           padding: const EdgeInsets.all(8.0),
           child: SafeArea(
             child: Column(children: [
-              Container(
-                alignment: Alignment.center,
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height * .1,
-                child: Text(
-                  "giải thích".toUpperCase(),
-                  style: const TextStyle(fontSize: 20),
-                ),
+              Row(
+                children: [
+                  ExitBtn(),
+                  Container(
+                    alignment: Alignment.center,
+                    width: MediaQuery.of(context).size.width * 0.9,
+                    height: MediaQuery.of(context).size.height * .1,
+                    child: Text(
+                      "giải thích".toUpperCase(),
+                      style: const TextStyle(fontSize: 20),
+                    ),
+                  ),
+                ],
               ),
               const SizedBox(
                 height: 10,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:nurnius/common/exit_btn.dart';
 import 'package:nurnius/common/utils.dart';
 import 'package:nurnius/game/screens/second_game_screen.dart';
 
@@ -12,17 +13,23 @@ class FinalScreen extends StatelessWidget {
       child: Scaffold(
         body: Column(
           children: [
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.2,
-              child: Center(
-                child: Text(
-                  "Giải thích".toUpperCase(),
-                  style: const TextStyle(
-                      color: Colors.black,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold),
+            Row(
+              children: [
+                ExitBtn(),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.2,
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  child: Center(
+                    child: Text(
+                      "Giải thích".toUpperCase(),
+                      style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
                 ),
-              ),
+              ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nurnius/common/Utils.dart';
+import 'package:nurnius/common/progress_bar.dart';
+import 'package:nurnius/game/screens/ReviewGame/question1.dart';
 import 'package:nurnius/game/screens/ReviewGame/questions_screen.dart';
 
 // ignore: must_be_immutable
@@ -12,22 +14,67 @@ class MapScreen extends StatefulWidget {
 }
 
 class _MapScreenState extends State<MapScreen> {
+  int number = 1;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFFF9F6F0),
-      body: Stack(children: [
-        Image.asset(
-          'assets/images/bg_review.jpeg',
-          fit: BoxFit.cover,
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
-        ),
-        buildCircle(0.3, 0.15, "1"),
-        buildCircle(0.6, 0.3, "2"),
-        buildCircle(0.2, 0.5, "3"),
-        buildCircle(0.6, 0.7, "4"),
-      ]),
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: const Color(0xFFF9F6F0),
+        body: Stack(children: [
+          Image.asset(
+            'assets/images/bg_review.jpeg',
+            fit: BoxFit.cover,
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+          ),
+          Positioned(
+            top: 15,
+            left: 20,
+            child: IconButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                icon: Icon(
+                  Icons.arrow_circle_left_outlined,
+                  size: 45,
+                )),
+          ),
+          Positioned(
+              top: -20,
+              left: MediaQuery.of(context).size.width * 0.2,
+              child: ProgressBar()),
+          buildCircle(0.3, 0.15, "1"),
+          buildCircle(0.55, 0.35, "2"),
+          buildCircle(0.23, 0.54, "3"),
+          buildCircle(0.58, 0.7, "4"),
+          Positioned(
+            top: MediaQuery.of(context).size.height * 0.25,
+            left: MediaQuery.of(context).size.width * 0.65,
+            child: IconButton(
+                onPressed: () {
+                  Widget screen_ = Question1();
+                  if (number == 1) {
+                    screen_ = Question1();
+                  }
+                  Utils.navigateForwardfunction(context, screen_);
+                },
+                icon: Icon(
+                  Icons.flag,
+                  color: Colors.red,
+                  size: 65,
+                )),
+          ),
+          Positioned(
+            top: MediaQuery.of(context).size.height * 0.31,
+            left: MediaQuery.of(context).size.width * 0.7,
+            child: Text(
+              number.toString(),
+              style:
+                  TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+            ),
+          ),
+        ]),
+      ),
     );
   }
 
@@ -37,19 +84,22 @@ class _MapScreenState extends State<MapScreen> {
       left: MediaQuery.of(context).size.width * left,
       child: GestureDetector(
         onTap: () {
-          if (content != "1") {
+          if (content == "4") {
             _showMyDialog();
           } else {
-            Utils.navigateForwardfunction(
-                context, QuestionScreen(screen: widget.screen));
+            setState(() {
+              number = int.parse(content);
+            });
+            // Utils.navigateForwardfunction(
+            //     context, QuestionScreen(screen: widget.screen));
           }
         },
         child: CircleAvatar(
-            backgroundColor: Colors.green,
-            radius: 50,
+            backgroundColor: Colors.blue[300],
+            radius: 40,
             child: CircleAvatar(
               backgroundColor: Colors.pinkAccent,
-              radius: 40,
+              radius: 33,
               child: Text(
                 content,
                 style: const TextStyle(fontSize: 30),

@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 // ignore: depend_on_referenced_packages
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:path/path.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sqflite/sqflite.dart';
 
 void main(List<String> args) async {
@@ -26,6 +27,13 @@ void main(List<String> args) async {
     // path to perform database upgrades and downgrades.
     version: 1,
   );
+
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  prefs.getBool("FirstGamePlayed") ?? prefs.setBool("FirstGamePlayed", false);
+  prefs.getBool("SecondGamePlayed") ?? prefs.setBool("SecondGamePlayed", false);
+  prefs.getBool("ThirdGamePlayed") ?? prefs.setBool("ThirdGamePlayed", false);
+  prefs.getBool("ReviewGamePlayed") ?? prefs.setBool("ReviewGamePlayed", false);
+
   runApp(const MyApp());
 }
 
