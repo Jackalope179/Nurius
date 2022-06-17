@@ -1,10 +1,12 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:nurnius/common/progress_bar.dart';
+import 'package:nurnius/common/utils.dart';
+import 'package:nurnius/game/screens/third_game_screen.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class EndScreen extends StatelessWidget {
   const EndScreen({Key? key}) : super(key: key);
-
   // Wrapper Widget
   @override
   Widget build(BuildContext context) {
@@ -38,16 +40,28 @@ class EndScreen extends StatelessWidget {
             ),
           ),
           actions: <Widget>[
-            TextButton(
+            OutlinedButton(
+              style: OutlinedButton.styleFrom(
+                primary: Colors.white,
+              ),
+              child: const Text(
+                'Gửi phản hồi',
+                style: TextStyle(color: Colors.white),
+              ),
+              onPressed: () async {
+                final Uri _url = Uri.parse(
+                    'https://docs.google.com/forms/d/e/1FAIpQLScvMiqFdZpBAxmU30bkfFrLrN5sJOuLxt14zf-c1Ta6jrl__w/viewform');
+                if (!await launchUrl(_url)) throw 'Could not launch $_url';
+              },
+            ),
+            OutlinedButton(
               child: const Text(
                 'Đến màn hình chính',
                 style: TextStyle(color: Colors.white),
               ),
               onPressed: () {
-                Navigator.of(context).popUntil(
-                    (route) => route.settings.name == "FirstGameScreen");
-                Navigator.of(context).pop();
-                ProgressBar.mana = 1;
+                Navigator.of(context)
+                    .popUntil((route) => route.settings.name == "GameScreen");
               },
             ),
           ],

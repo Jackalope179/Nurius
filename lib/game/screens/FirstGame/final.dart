@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nurnius/common/exit_btn.dart';
+import 'package:nurnius/common/metadata.dart';
 import 'package:nurnius/common/utils.dart';
 import 'package:nurnius/game/screens/second_game_screen.dart';
 
@@ -123,6 +124,7 @@ class FinalScreen extends StatelessWidget {
                   width: MediaQuery.of(context).size.width * 0.2,
                   child: IconButton(
                     onPressed: () {
+                      GameMetaData.FirstGamePlayed = true;
                       Utils.navigateForwardfunction(
                           context, const SecondGameScreen());
                     },

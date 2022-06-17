@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:nurnius/common/metadata.dart';
 import 'package:nurnius/common/utils.dart';
 import 'package:nurnius/game/screens/ThirdGame/end_screen.dart';
 import 'package:nurnius/game/screens/ThirdGame/explain3.dart';
+import 'package:nurnius/game/screens/third_game_screen.dart';
 
 class ExplainThirdGame3 extends StatefulWidget {
   const ExplainThirdGame3({Key? key}) : super(key: key);
@@ -113,7 +115,9 @@ class _ExplainThirdGame3State extends State<ExplainThirdGame3> {
                 )),
                 IconButton(
                   onPressed: () {
-                    Utils.navigateForwardfunction(context, const EndScreen());
+                    GameMetaData.ThirdGamePlayed = true;
+                    Utils.navigateForwardfunction(
+                        context, ThirdGameScreen(done: true));
                   },
                   icon: Icon(FontAwesomeIcons.forward),
                 ),

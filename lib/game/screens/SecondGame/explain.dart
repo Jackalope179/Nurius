@@ -128,7 +128,10 @@ class _ExplainScreenGame2State extends State<ExplainScreenGame2> {
                               // child: const Text("Qua màn"),
                               onPressed: () {
                                 Utils.navigateForwardfunction(
-                                    context, const ThirdGameScreen());
+                                    context,
+                                    ThirdGameScreen(
+                                      done: false,
+                                    ));
                               },
                             ),
                           ],

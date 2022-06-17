@@ -2,6 +2,7 @@
 import "package:firebase_core/firebase_core.dart";
 import 'package:flutter/material.dart';
 import 'package:nurnius/app.dart';
+import 'package:nurnius/homepage/screens/home_page.dart';
 import 'package:nurnius/provider/google_sign_in.dart';
 // ignore: depend_on_referenced_packages
 import 'package:provider/provider.dart';
@@ -53,7 +54,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: const NuriusApp(),
+        home: HomePage(),
       ),
     );
   }

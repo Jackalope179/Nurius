@@ -8,6 +8,8 @@ class ExitBtn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // global key for the exit button
+    final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
     return Align(
       alignment: Alignment.topLeft,
       child: IconButton(

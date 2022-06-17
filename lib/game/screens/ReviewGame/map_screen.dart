@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:nurnius/common/Utils.dart';
+import 'package:nurnius/common/metadata.dart';
 import 'package:nurnius/common/progress_bar.dart';
 import 'package:nurnius/game/screens/ReviewGame/question1.dart';
 import 'package:nurnius/game/screens/ReviewGame/questions_screen.dart';
+import 'package:nurnius/game/screens/first_game_screen.dart';
+import 'package:nurnius/game/screens/second_game_screen.dart';
+import 'package:nurnius/game/screens/third_game_screen.dart';
 
 // ignore: must_be_immutable
 class MapScreen extends StatefulWidget {
@@ -52,11 +56,8 @@ class _MapScreenState extends State<MapScreen> {
             left: MediaQuery.of(context).size.width * 0.65,
             child: IconButton(
                 onPressed: () {
-                  Widget screen_ = Question1();
-                  if (number == 1) {
-                    screen_ = Question1();
-                  }
-                  Utils.navigateForwardfunction(context, screen_);
+                  Utils.navigateForwardfunction(
+                      context, QuestionScreen(screen: widget.screen));
                 },
                 icon: Icon(
                   Icons.flag,
@@ -64,21 +65,25 @@ class _MapScreenState extends State<MapScreen> {
                   size: 65,
                 )),
           ),
-          Positioned(
-            top: MediaQuery.of(context).size.height * 0.31,
-            left: MediaQuery.of(context).size.width * 0.7,
-            child: Text(
-              number.toString(),
-              style:
-                  TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-            ),
-          ),
         ]),
       ),
     );
   }
 
   Widget buildCircle(double top, double left, String content) {
+    Color? outerBgColor = Colors.blue[100];
+    Color? innerBgColor = Colors.pink[100];
+
+    if (content == "1" && GameMetaData.FirstGamePlayed) {
+      outerBgColor = Colors.blue[300];
+      innerBgColor = Colors.pinkAccent;
+    } else if (content == "2" && GameMetaData.SecondGamePlayed) {
+      outerBgColor = Colors.blue[300];
+      innerBgColor = Colors.pinkAccent;
+    } else if (content == "3" && GameMetaData.ThirdGamePlayed) {
+      outerBgColor = Colors.blue[300];
+      innerBgColor = Colors.pinkAccent;
+    }
     return Positioned(
       top: MediaQuery.of(context).size.height * top,
       left: MediaQuery.of(context).size.width * left,
@@ -93,12 +98,21 @@ class _MapScreenState extends State<MapScreen> {
             // Utils.navigateForwardfunction(
             //     context, QuestionScreen(screen: widget.screen));
           }
+
+          if (content == "1" && GameMetaData.FirstGamePlayed) {
+            Utils.navigateForwardfunction(context, FirstGameScreen());
+          } else if (content == "2" && GameMetaData.SecondGamePlayed) {
+            Utils.navigateForwardfunction(context, SecondGameScreen());
+          } else if (content == "3" && GameMetaData.ThirdGamePlayed) {
+            Utils.navigateForwardfunction(
+                context, ThirdGameScreen(done: false));
+          }
         },
         child: CircleAvatar(
-            backgroundColor: Colors.blue[300],
+            backgroundColor: outerBgColor,
             radius: 40,
             child: CircleAvatar(
-              backgroundColor: Colors.pinkAccent,
+              backgroundColor: innerBgColor,
               radius: 33,
               child: Text(
                 content,

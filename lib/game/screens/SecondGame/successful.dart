@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nurnius/common/metadata.dart';
 import 'package:nurnius/common/utils.dart';
 import 'package:nurnius/game/screens/SecondGame/explain.dart';
 import 'package:nurnius/game/screens/third_game_screen.dart';
@@ -61,8 +62,12 @@ class _SuccessScreenState extends State<SuccessScreen> {
                       ),
                       child: const Text("Qua màn"),
                       onPressed: () {
+                        GameMetaData.SecondGamePlayed = true;
                         Utils.navigateForwardfunction(
-                            context, const ThirdGameScreen());
+                            context,
+                            ThirdGameScreen(
+                              done: false,
+                            ));
                       },
                     ),
                   ],

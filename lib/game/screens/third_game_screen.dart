@@ -3,11 +3,12 @@ import 'package:nurnius/common/exit_btn.dart';
 import 'package:nurnius/common/progress_bar.dart';
 import 'package:nurnius/common/review_btn.dart';
 import 'package:nurnius/common/utils.dart';
+import 'package:nurnius/game/screens/ThirdGame/end_screen.dart';
 import 'package:nurnius/game/screens/ThirdGame/third_game.dart';
 
 class ThirdGameScreen extends StatefulWidget {
-  const ThirdGameScreen({Key? key}) : super(key: key);
-
+  ThirdGameScreen({Key? key, required this.done}) : super(key: key);
+  bool done = false;
   @override
   State<ThirdGameScreen> createState() => _ThirdGameScreenState();
 }
@@ -18,11 +19,20 @@ class _ThirdGameScreenState extends State<ThirdGameScreen> {
   bool isPressed = false;
   @override
   Widget build(BuildContext context) {
-    if (MediaQuery.of(context).size.width * 0.35 - left < 100) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        Utils.navigateForwardfunction(context, const ThirdGame());
-      });
+    if (widget.done == false) {
+      if (MediaQuery.of(context).size.width * 0.35 - left < 100) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          Utils.navigateForwardfunction(context, const ThirdGame());
+        });
+      }
+    } else {
+      if (MediaQuery.of(context).size.width * 0.8 - left < 100) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          Utils.navigateForwardfunction(context, const EndScreen());
+        });
+      }
     }
+
     return SafeArea(
       child: Scaffold(
         body: Stack(children: [
@@ -95,7 +105,10 @@ class _ThirdGameScreenState extends State<ThirdGameScreen> {
                   }
                   await Future.delayed(const Duration(milliseconds: 100));
                 } while (isPressed &&
-                    MediaQuery.of(context).size.width * 0.35 - left >= 100);
+                    (widget.done
+                        ? MediaQuery.of(context).size.width * 0.8 - left >= 100
+                        : MediaQuery.of(context).size.width * 0.35 - left >=
+                            100));
               },
               onLongPressEnd: (_) {
                 setState(() => isPressed = false);

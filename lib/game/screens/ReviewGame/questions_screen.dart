@@ -57,49 +57,10 @@ class _QuestionScreenState extends State<QuestionScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.1,
-                  child: IconButton(
-                    onPressed: () {
-                      if (currentQuestion > 0) {
-                        setState(() {
-                          currentQuestion--;
-                        });
-                      } else {
-                        Navigator.pop(context);
-                      }
-                    },
-                    icon: const Icon(
-                      FontAwesomeIcons.backward,
-                      size: 45,
-                    ),
-                  ),
-                ),
                 buildQuestion(
                     listQuestion[currentQuestion]['id'].toString(),
                     listQuestion[currentQuestion]['question'].toString(),
                     listQuestion[currentQuestion]['answer']),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.1,
-                  child: IconButton(
-                    onPressed: () {
-                      if (currentQuestion < listQuestion.length) {
-                        if (choosenAnswer[currentQuestion].toString() !=
-                            listQuestion[currentQuestion]["correct"]) {
-                          _showWrongdialog(listQuestion[currentQuestion]
-                                  ["correctAnswer"]
-                              .toString());
-                        } else {
-                          _showCorrectdialog();
-                        }
-                      } else {}
-                    },
-                    icon: const Icon(
-                      FontAwesomeIcons.forward,
-                      size: 45,
-                    ),
-                  ),
-                ),
               ],
             ),
           ],
@@ -125,103 +86,141 @@ class _QuestionScreenState extends State<QuestionScreen> {
         width: MediaQuery.of(context).size.width * 0.65,
         height: MediaQuery.of(context).size.height * 0.6,
         alignment: Alignment.center,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Text(
-              "Câu $id",
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.pinkAccent,
+        child: Stack(children: [
+          Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.8,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Container(
+                      alignment: Alignment.center,
+                      width: MediaQuery.of(context).size.width * 0.6,
+                      child: Text(
+                        "Câu $id",
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.pinkAccent,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            Text(
-              question,
-              textAlign: TextAlign.center,
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
+              Text(
+                question,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
               ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        choosenAnswer[currentQuestion] = 0;
+                      });
+                    },
+                    child: Text(
+                      "A. ${answer[0]}",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: (currentQuestion + 1).toString() == id &&
+                                choosenAnswer[currentQuestion] == 0
+                            ? Colors.pink
+                            : Colors.black,
+                      ),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        choosenAnswer[currentQuestion] = 1;
+                      });
+                    },
+                    child: Text(
+                      "B. ${answer[1]}",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: (currentQuestion + 1).toString() == id &&
+                                choosenAnswer[currentQuestion] == 1
+                            ? Colors.pink
+                            : Colors.black,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        choosenAnswer[currentQuestion] = 2;
+                      });
+                    },
+                    child: Text(
+                      "C. ${answer[2]}",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: (currentQuestion + 1).toString() == id &&
+                                choosenAnswer[currentQuestion] == 2
+                            ? Colors.pink
+                            : Colors.black,
+                      ),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        choosenAnswer[currentQuestion] = 3;
+                      });
+                    },
+                    child: Text(
+                      "D. ${answer[3]}",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: (currentQuestion + 1).toString() == id &&
+                                choosenAnswer[currentQuestion] == 3
+                            ? Colors.pink
+                            : Colors.black,
+                      ),
+                    ),
+                  ),
+                ],
+              )
+            ],
+          ),
+          Positioned(
+            top: 0,
+            right: MediaQuery.of(context).size.width * 0.1,
+            child: Container(
+              width: MediaQuery.of(context).size.width * 0.05,
+              child: IconButton(
+                  onPressed: () {
+                    print(answer[choosenAnswer[currentQuestion]]);
+                    if (answer[choosenAnswer[currentQuestion]] ==
+                        listQuestion[currentQuestion]["correctAnswer"]) {
+                      _showCorrectdialog();
+                    } else {
+                      _showWrongdialog(listQuestion[currentQuestion]
+                              ["correctAnswer"]
+                          .toString());
+                    }
+                  },
+                  icon: Icon(
+                    Icons.check_circle,
+                    color: Colors.blue[500],
+                    size: 45,
+                  )),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      choosenAnswer[currentQuestion] = 0;
-                    });
-                  },
-                  child: Text(
-                    "A. ${answer[0]}",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: (currentQuestion + 1).toString() == id &&
-                              choosenAnswer[currentQuestion] == 0
-                          ? Colors.pink
-                          : Colors.black,
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      choosenAnswer[currentQuestion] = 1;
-                    });
-                  },
-                  child: Text(
-                    "B. ${answer[1]}",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: (currentQuestion + 1).toString() == id &&
-                              choosenAnswer[currentQuestion] == 1
-                          ? Colors.pink
-                          : Colors.black,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      choosenAnswer[currentQuestion] = 2;
-                    });
-                  },
-                  child: Text(
-                    "C. ${answer[2]}",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: (currentQuestion + 1).toString() == id &&
-                              choosenAnswer[currentQuestion] == 2
-                          ? Colors.pink
-                          : Colors.black,
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      choosenAnswer[currentQuestion] = 3;
-                    });
-                  },
-                  child: Text(
-                    "D. ${answer[3]}",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: (currentQuestion + 1).toString() == id &&
-                              choosenAnswer[currentQuestion] == 3
-                          ? Colors.pink
-                          : Colors.black,
-                    ),
-                  ),
-                ),
-              ],
-            )
-          ],
-        ),
+          ),
+        ]),
       ),
     );
   }
@@ -302,6 +301,15 @@ class _QuestionScreenState extends State<QuestionScreen> {
               children: <Widget>[
                 Text(
                   "đáp án $answer".toUpperCase(),
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                      color: Color(0xff000f9a), fontWeight: FontWeight.bold),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  "Hãy đọc lí do ở màn ${currentQuestion + 1} để hiểu chi tiết hơn nhé",
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                       color: Color(0xff000f9a), fontWeight: FontWeight.bold),

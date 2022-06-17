@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nurnius/common/exit_btn.dart';
@@ -6,6 +7,7 @@ import 'package:nurnius/common/review_btn.dart';
 import 'package:nurnius/common/utils.dart';
 import 'package:nurnius/game/screens/FirstGame/first_game.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
 
 class FirstGameScreen extends StatefulWidget {
   const FirstGameScreen({Key? key}) : super(key: key);
@@ -18,6 +20,63 @@ class _FirstGameScreenState extends State<FirstGameScreen> {
   String path = 'assets/images/baby1.png';
   double left = 0;
   bool isPressed = false;
+  List<TargetFocus> targets = [];
+  GlobalKey key = GlobalKey();
+  GlobalKey key1 = GlobalKey();
+  GlobalKey key2 = GlobalKey();
+  // GlobalKey key3 = GlobalKey();
+  // GlobalKey keỹ = GlobalKey();
+
+  @override
+  void initState() {
+    initTargets();
+    WidgetsBinding.instance.addPostFrameCallback((_afterLayout) {
+      showTutorial();
+    });
+    super.initState();
+  }
+
+  void _afterLayout() {
+    Future.delayed(Duration(microseconds: 100));
+    showTutorial();
+  }
+
+  void initTargets() {
+    targets.add(TargetFocus(identify: "Target 1", keyTarget: key1, contents: [
+      TargetContent(
+          align: ContentAlign.bottom,
+          child: Container(
+              child: Column(
+            children: [
+              Text(
+                "Hello",
+                style: TextStyle(
+                  fontSize: 25,
+                  color: Colors.red,
+                ),
+              )
+            ],
+          ))),
+    ]));
+
+    targets.add(TargetFocus(identify: "Target 2", keyTarget: key2, contents: [
+      TargetContent(
+          align: ContentAlign.bottom,
+          child: Container(
+              child: Column(
+            children: [
+              Text(
+                "Hello",
+                style: TextStyle(
+                  fontSize: 25,
+                  color: Colors.red,
+                ),
+              )
+            ],
+          ))),
+    ]));
+  }
+
   @override
   Widget build(BuildContext context) {
     if (MediaQuery.of(context).size.width - left < 100) {
@@ -28,6 +87,7 @@ class _FirstGameScreenState extends State<FirstGameScreen> {
     }
     return SafeArea(
       child: Scaffold(
+        key: key,
         body: Stack(children: [
           Image.asset(
             'assets/images/bg2.png',
@@ -35,7 +95,11 @@ class _FirstGameScreenState extends State<FirstGameScreen> {
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
           ),
-          ExitBtn(),
+          // create global key for button
+
+          Container(
+            child: ExitBtn(),
+          ),
           Positioned(
             top: -25,
             left: MediaQuery.of(context).size.width * 0.25,
@@ -58,6 +122,7 @@ class _FirstGameScreenState extends State<FirstGameScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             GestureDetector(
+              key: key1,
               onLongPressStart: (_) async {
                 isPressed = true;
                 do {
@@ -81,6 +146,7 @@ class _FirstGameScreenState extends State<FirstGameScreen> {
                   heroTag: 'btn1', child: createButton(2), onPressed: () {}),
             ),
             GestureDetector(
+              key: key2,
               onLongPressStart: (_) async {
                 isPressed = true;
                 do {
@@ -122,5 +188,17 @@ class _FirstGameScreenState extends State<FirstGameScreen> {
             Icons.arrow_left,
             size: 35,
           );
+  }
+
+  void showTutorial() {
+    TutorialCoachMark tutorial = TutorialCoachMark(
+      context,
+      targets: targets, // List<TargetFocus>
+      colorShadow: Colors.blueAccent, // DEFAULT Colors.black
+      // alignSkip: Alignment.bottomRight,
+      opacityShadow: 0.7,
+      // textSkip: "SKIP",
+      // paddingFocus: 10,
+    )..show();
   }
 }
