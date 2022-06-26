@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nurnius/game/components/play_button.dart';
+import 'package:nurnius/homepage/screens/home_page.dart';
 
 class GameScreen extends StatefulWidget {
   const GameScreen({Key? key}) : super(key: key);
@@ -44,7 +45,11 @@ class _GameScreenState extends State<GameScreen> {
                 alignment: Alignment.topLeft,
                 child: IconButton(
                   onPressed: () {
-                    Navigator.pop(context);
+                    // Navigator.pop(context);
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(builder: (context) => HomePage()),
+                        (route) => true);
                   },
                   icon: const Icon(
                     FontAwesomeIcons.doorOpen,

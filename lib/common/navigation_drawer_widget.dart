@@ -153,7 +153,7 @@ class NavigationDrawerWidget extends StatelessWidget {
   }
 
   void selectedItem(BuildContext context, int index) {
-    Navigator.of(context).pop();
+    Navigator.of(context, rootNavigator: true).pop();
 
     switch (index) {
       case 0:

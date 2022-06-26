@@ -5,11 +5,14 @@ class Utils {
     Route route = MaterialPageRoute(
         builder: (context) => widget,
         settings: RouteSettings(name: widget.toStringShort()));
-    Navigator.push(context, route);
+    Navigator.of(context, rootNavigator: true).push(route);
   }
 
-  static void popBack(BuildContext context, String screen) {
-    Navigator.of(context).popUntil((route) => route.settings.name == screen);
+  static void popBack(BuildContext context, String screen, Widget screen_) {
+    Navigator.of(context, rootNavigator: true)
+        .popUntil((route) => route.settings.name == screen);
+    // handle black screen
+    // Utils.navigateForwardfunction(context, screen_);
   }
 
   static void showSnackBar(BuildContext context, String message) {
@@ -52,7 +55,7 @@ class Utils {
                 style: TextStyle(color: Colors.white),
               ),
               onPressed: () {
-                Navigator.of(context).pop();
+                Navigator.of(context, rootNavigator: true).pop();
               },
             ),
           ],

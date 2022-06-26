@@ -15,7 +15,7 @@ class FirstIntroGame1 extends StatelessWidget {
         TextButton(
           child: const Text('OK'),
           onPressed: () {
-            Navigator.of(context).pop();
+            Navigator.of(context, rootNavigator: true).pop();
           },
         ),
       ],

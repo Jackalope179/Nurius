@@ -166,7 +166,7 @@ class _FirstGameState extends State<FirstGame> {
                 style: TextStyle(color: Colors.white),
               ),
               onPressed: () {
-                Navigator.of(context).pop();
+                Navigator.of(context, rootNavigator: true).pop();
               },
             ),
             TextButton(
@@ -185,7 +185,7 @@ class _FirstGameState extends State<FirstGame> {
                     ),
               onPressed: () {
                 item != "binhnuoc1"
-                    ? Navigator.of(context).pop()
+                    ? Navigator.of(context, rootNavigator: true).pop()
                     : Utils.navigateForwardfunction(
                         context, const ExplainScreenGame1());
               },

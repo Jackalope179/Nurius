@@ -133,7 +133,7 @@ class _MapScreenState extends State<MapScreen> {
             left: 20,
             child: IconButton(
                 onPressed: () {
-                  Navigator.of(context).pop();
+                  Navigator.of(context, rootNavigator: true).pop();
                 },
                 icon: const Icon(
                   Icons.arrow_circle_left_outlined,

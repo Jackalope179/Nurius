@@ -229,7 +229,7 @@ class _MilkScreenState extends State<MilkScreen>
                 correct
                     ? Utils.navigateForwardfunction(
                         context, const FinalScreen())
-                    : Navigator.of(context).pop();
+                    : Navigator.of(context, rootNavigator: true).pop();
               },
             ),
           ],

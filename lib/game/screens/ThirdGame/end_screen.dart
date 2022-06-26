@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:nurnius/common/progress_bar.dart';
+import 'package:nurnius/common/utils.dart';
+import 'package:nurnius/game/screens/intro_game_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class EndScreen extends StatelessWidget {
@@ -59,8 +61,10 @@ class EndScreen extends StatelessWidget {
               ),
               onPressed: () {
                 ProgressBar.mana = 1;
-                Navigator.of(context)
-                    .popUntil((route) => route.settings.name == "GameScreen");
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) => GameScreen()),
+                    (route) => true);
               },
             ),
           ],

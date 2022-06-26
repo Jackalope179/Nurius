@@ -70,7 +70,9 @@ class _SignUpState extends State<SignUp> {
                       ),
                     ),
                     onTap: () {
-                      Navigator.of(context).pop();
+                      Navigator.of(
+                        context,
+                      ).pop();
                     },
                   )
                 ],

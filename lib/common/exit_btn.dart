@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nurnius/common/utils.dart';
+import 'package:nurnius/game/screens/intro_game_screen.dart';
 
 class ExitBtn extends StatelessWidget {
   const ExitBtn({Key? key}) : super(key: key);
@@ -11,7 +12,11 @@ class ExitBtn extends StatelessWidget {
       alignment: Alignment.topLeft,
       child: IconButton(
         onPressed: () {
-          Utils.popBack(context, "GameScreen");
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => GameScreen()),
+              (route) => true);
+          // Utils.popBack(context, "GameScreen", GameScreen());
         },
         icon: const Icon(
           FontAwesomeIcons.doorOpen,
